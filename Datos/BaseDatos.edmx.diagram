@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d927c4ac5e704d43b985a762e83883c7" Name="Diagram1">
+        <EntityTypeShape EntityType="BD.Controlador" Width="1.5" PointX="1.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Modulo" Width="1.5" PointX="1.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Operaciones" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Rol" Width="1.5" PointX="0.75" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Rol_Operacion" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Usuario" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.AditExt" Width="1.5" PointX="9.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.AparElec" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Cliente" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Contrato" Width="1.5" PointX="7.5" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Cuarto" Width="1.5" PointX="5.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.DañoCliente" Width="1.5" PointX="9.75" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Daños" Width="1.5" PointX="5.25" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.DetalleMante" Width="1.5" PointX="7.5" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Mantenimiento" Width="1.5" PointX="5.25" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Mora" Width="1.5" PointX="5.25" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.Pago" Width="1.5" PointX="9.75" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD.TipoPago" Width="1.5" PointX="5.25" PointY="38.125" IsExpanded="true" />
+        <AssociationConnector Association="BD.FK_Controlador" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_Modulo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_Operacion" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_Rol_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_Rol1" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_C_RE" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_Cr" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_CR_e" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_CR_EAD" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_Cr_EAdo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_CrEA_Do" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_CrEado" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_E_LI" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_El" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_EL_i" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_ELI_M_INA" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_ElI_Mina" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_ElIMI_Na" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_ElImina" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_M_OD" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_Mo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_MO_d" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_MOD_I_FICA" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_MoDI_fica" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_MoDIFI_ca" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_MoDifica" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKAnu" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKCr" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKCRe" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKCrea" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKCread" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKCreado" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKEl" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKELi" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKElimi" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKElimina" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKMo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKMOd" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKModif" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKModifica" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKMody" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKContrato" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKIdApaElec" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKIdClient" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FK_IdCuarto" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKIdContra" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKIdContratos" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKIdCuarto" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKDaño" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKIdMante" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKIdMora" ManuallyRouted="false" />
+        <AssociationConnector Association="BD.FKIdTipoPago" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

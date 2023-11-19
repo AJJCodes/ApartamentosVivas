@@ -1,0 +1,2486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BD.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Controlador">
+          <Key>
+            <PropertyRef Name="IdControlador" />
+          </Key>
+          <Property Name="IdControlador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreControlador" Type="nvarchar" MaxLength="260" />
+          <Property Name="IdModulo" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="Icono" Type="nvarchar" MaxLength="260" />
+        </EntityType>
+        <EntityType Name="Modulo">
+          <Key>
+            <PropertyRef Name="IdModulo" />
+          </Key>
+          <Property Name="IdModulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreModulo" Type="nvarchar" MaxLength="260" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Operaciones">
+          <Key>
+            <PropertyRef Name="IdOperacion" />
+          </Key>
+          <Property Name="IdOperacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreOperacion" Type="varchar" MaxLength="260" />
+          <Property Name="IdControlador" Type="int" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreRol" Type="nvarchar" MaxLength="100" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol_Operacion">
+          <Key>
+            <PropertyRef Name="IdRolOperacion" />
+          </Key>
+          <Property Name="IdRolOperacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRol" Type="int" />
+          <Property Name="IdOperacion" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="260" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="260" />
+          <Property Name="NombreUsuario" Type="nvarchar" MaxLength="90" />
+          <Property Name="Email" Type="nvarchar" MaxLength="260" />
+          <Property Name="Contraseña" Type="nvarchar" MaxLength="260" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdRol" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AditExt">
+          <Key>
+            <PropertyRef Name="IdAditExt" />
+          </Key>
+          <Property Name="Costo" Type="float" Nullable="false" />
+          <Property Name="IdApaElec" Type="int" Nullable="false" />
+          <Property Name="IdAditExt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdContrato" Type="int" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="AparElec">
+          <Key>
+            <PropertyRef Name="IdApaElec" />
+          </Key>
+          <Property Name="NomApaElec" Type="nvarchar" MaxLength="25" />
+          <Property Name="IdApaElec" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="NomCliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cedula" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="TelCliente" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="Contrato">
+          <Key>
+            <PropertyRef Name="IdContrato" />
+          </Key>
+          <Property Name="FechaIni" Type="datetime" Nullable="false" />
+          <Property Name="Fechafin" Type="date" />
+          <Property Name="Deposito" Type="float" Nullable="false" />
+          <Property Name="IdCuarto" Type="int" />
+          <Property Name="Estado" Type="bit" />
+          <Property Name="IdContrato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="AnuladoPor" Type="int" />
+        </EntityType>
+        <EntityType Name="Cuarto">
+          <Key>
+            <PropertyRef Name="IdCuarto" />
+          </Key>
+          <Property Name="DescripCuarto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Costo" Type="float" Nullable="false" />
+          <Property Name="EstadoRenta" Type="bit" />
+          <Property Name="EstadoMante" Type="bit" />
+          <Property Name="CodigoCuarto" Type="varchar" MaxLength="10" />
+          <Property Name="IdCuarto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="DañoCliente">
+          <Key>
+            <PropertyRef Name="IdRegistro" />
+          </Key>
+          <Property Name="Costo" Type="float" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdRegistro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdContrato" Type="int" />
+          <Property Name="IdDaño" Type="int" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="Daños">
+          <Key>
+            <PropertyRef Name="IdDaño" />
+          </Key>
+          <Property Name="DescripDaño" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdDaño" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="DetalleMante">
+          <Key>
+            <PropertyRef Name="IdDetaMante" />
+          </Key>
+          <Property Name="DescripDetalle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Costo" Type="float" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdCuarto" Type="int" />
+          <Property Name="IdMante" Type="int" />
+          <Property Name="IdDetaMante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="Mantenimiento">
+          <Key>
+            <PropertyRef Name="IdMante" />
+          </Key>
+          <Property Name="Descripcion" Type="varchar" MaxLength="25" />
+          <Property Name="IdMante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="Mora">
+          <Key>
+            <PropertyRef Name="IdMora" />
+          </Key>
+          <Property Name="PorcenMora" Type="float" Nullable="false" />
+          <Property Name="IdMora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="IdPago" />
+          </Key>
+          <Property Name="FechaPago" Type="datetime" Nullable="false" />
+          <Property Name="MontoPago" Type="float" />
+          <Property Name="IdTipoPago" Type="int" />
+          <Property Name="IdContrato" Type="int" />
+          <Property Name="IdMora" Type="int" />
+          <Property Name="IdPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <EntityType Name="TipoPago">
+          <Key>
+            <PropertyRef Name="IdTipoPago" />
+          </Key>
+          <Property Name="NomTipoPago" Type="varchar" MaxLength="25" />
+          <Property Name="IdTipoPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreadoPor" Type="int" />
+          <Property Name="ModificaPor" Type="int" />
+          <Property Name="EliminaPor" Type="int" />
+        </EntityType>
+        <Association Name="FK_C_RE">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Controlador">
+          <End Role="Controlador" Type="Self.Controlador" Multiplicity="0..1" />
+          <End Role="Operaciones" Type="Self.Operaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Controlador">
+              <PropertyRef Name="IdControlador" />
+            </Principal>
+            <Dependent Role="Operaciones">
+              <PropertyRef Name="IdControlador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cr">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CR_e">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cuarto">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CR_EAD">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mora" Type="Self.Mora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mora">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cr_EAdo">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrEA_Do">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="TipoPago" Type="Self.TipoPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="TipoPago">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrEado">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mantenimiento">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_E_LI">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_El">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EL_i">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cuarto">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ELI_M_INA">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mora" Type="Self.Mora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mora">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElI_Mina">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElIMI_Na">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="TipoPago" Type="Self.TipoPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="TipoPago">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElImina">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mantenimiento">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdCuarto">
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuarto">
+              <PropertyRef Name="IdCuarto" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdCuarto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_OD">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mo">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MO_d">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cuarto">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MOD_I_FICA">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mora" Type="Self.Mora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mora">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoDI_fica">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoDIFI_ca">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="TipoPago" Type="Self.TipoPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="TipoPago">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoDifica">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mantenimiento">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modulo">
+          <End Role="Modulo" Type="Self.Modulo" Multiplicity="0..1" />
+          <End Role="Controlador" Type="Self.Controlador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="IdModulo" />
+            </Principal>
+            <Dependent Role="Controlador">
+              <PropertyRef Name="IdModulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operacion">
+          <End Role="Operaciones" Type="Self.Operaciones" Multiplicity="0..1" />
+          <End Role="Rol_Operacion" Type="Self.Rol_Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operaciones">
+              <PropertyRef Name="IdOperacion" />
+            </Principal>
+            <Dependent Role="Rol_Operacion">
+              <PropertyRef Name="IdOperacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_Usuario">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol1">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Rol_Operacion" Type="Self.Rol_Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Rol_Operacion">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAnu">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="AnuladoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKContrato">
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contrato">
+              <PropertyRef Name="IdContrato" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="IdContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCr">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCRe">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AparElec" Type="Self.AparElec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AparElec">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCrea">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCread">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Daños" Type="Self.Daños" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Daños">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCreado">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDaño">
+          <End Role="Daños" Type="Self.Daños" Multiplicity="0..1" />
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Daños">
+              <PropertyRef Name="IdDaño" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="IdDaño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEl">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKELi">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AparElec" Type="Self.AparElec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AparElec">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKElimi">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Daños" Type="Self.Daños" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Daños">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKElimina">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdApaElec">
+          <End Role="AparElec" Type="Self.AparElec" Multiplicity="1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AparElec">
+              <PropertyRef Name="IdApaElec" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="IdApaElec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdClient">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdContra">
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contrato">
+              <PropertyRef Name="IdContrato" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdContratos">
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contrato">
+              <PropertyRef Name="IdContrato" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="IdContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdCuarto">
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="0..1" />
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuarto">
+              <PropertyRef Name="IdCuarto" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="IdCuarto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdMante">
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mantenimiento">
+              <PropertyRef Name="IdMante" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="IdMante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdMora">
+          <End Role="Mora" Type="Self.Mora" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mora">
+              <PropertyRef Name="IdMora" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdMora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdTipoPago">
+          <End Role="TipoPago" Type="Self.TipoPago" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPago">
+              <PropertyRef Name="IdTipoPago" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdTipoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMo">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMOd">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AparElec" Type="Self.AparElec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AparElec">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKModif">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Daños" Type="Self.Daños" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Daños">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKModifica">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMody">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDStoreContainer">
+          <EntitySet Name="Controlador" EntityType="Self.Controlador" Schema="Seguridad" store:Type="Tables" />
+          <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="Seguridad" store:Type="Tables" />
+          <EntitySet Name="Operaciones" EntityType="Self.Operaciones" Schema="Seguridad" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="Seguridad" store:Type="Tables" />
+          <EntitySet Name="Rol_Operacion" EntityType="Self.Rol_Operacion" Schema="Seguridad" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="Seguridad" store:Type="Tables" />
+          <EntitySet Name="AditExt" EntityType="Self.AditExt" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="AparElec" EntityType="Self.AparElec" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="Contrato" EntityType="Self.Contrato" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="Cuarto" EntityType="Self.Cuarto" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="DañoCliente" EntityType="Self.DañoCliente" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="Daños" EntityType="Self.Daños" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="DetalleMante" EntityType="Self.DetalleMante" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="Mantenimiento" EntityType="Self.Mantenimiento" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="Mora" EntityType="Self.Mora" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="Pago" EntityType="Self.Pago" Schema="vivas" store:Type="Tables" />
+          <EntitySet Name="TipoPago" EntityType="Self.TipoPago" Schema="vivas" store:Type="Tables" />
+          <AssociationSet Name="FK_C_RE" Association="Self.FK_C_RE">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Controlador" Association="Self.FK_Controlador">
+            <End Role="Controlador" EntitySet="Controlador" />
+            <End Role="Operaciones" EntitySet="Operaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cr" Association="Self.FK_Cr">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CR_e" Association="Self.FK_CR_e">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuarto" EntitySet="Cuarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CR_EAD" Association="Self.FK_CR_EAD">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mora" EntitySet="Mora" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cr_EAdo" Association="Self.FK_Cr_EAdo">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrEA_Do" Association="Self.FK_CrEA_Do">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="TipoPago" EntitySet="TipoPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrEado" Association="Self.FK_CrEado">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_E_LI" Association="Self.FK_E_LI">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_El" Association="Self.FK_El">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EL_i" Association="Self.FK_EL_i">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuarto" EntitySet="Cuarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ELI_M_INA" Association="Self.FK_ELI_M_INA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mora" EntitySet="Mora" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElI_Mina" Association="Self.FK_ElI_Mina">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElIMI_Na" Association="Self.FK_ElIMI_Na">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="TipoPago" EntitySet="TipoPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElImina" Association="Self.FK_ElImina">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdCuarto" Association="Self.FK_IdCuarto">
+            <End Role="Cuarto" EntitySet="Cuarto" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_OD" Association="Self.FK_M_OD">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mo" Association="Self.FK_Mo">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MO_d" Association="Self.FK_MO_d">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuarto" EntitySet="Cuarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MOD_I_FICA" Association="Self.FK_MOD_I_FICA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mora" EntitySet="Mora" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoDI_fica" Association="Self.FK_MoDI_fica">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoDIFI_ca" Association="Self.FK_MoDIFI_ca">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="TipoPago" EntitySet="TipoPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoDifica" Association="Self.FK_MoDifica">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modulo" Association="Self.FK_Modulo">
+            <End Role="Modulo" EntitySet="Modulo" />
+            <End Role="Controlador" EntitySet="Controlador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operacion" Association="Self.FK_Operacion">
+            <End Role="Operaciones" EntitySet="Operaciones" />
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_Usuario" Association="Self.FK_Rol_Usuario">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol1" Association="Self.FK_Rol1">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FKAnu" Association="Self.FKAnu">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FKContrato" Association="Self.FKContrato">
+            <End Role="Contrato" EntitySet="Contrato" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKCr" Association="Self.FKCr">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKCRe" Association="Self.FKCRe">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AparElec" EntitySet="AparElec" />
+          </AssociationSet>
+          <AssociationSet Name="FKCrea" Association="Self.FKCrea">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FKCread" Association="Self.FKCread">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Daños" EntitySet="Daños" />
+          </AssociationSet>
+          <AssociationSet Name="FKCreado" Association="Self.FKCreado">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKDaño" Association="Self.FKDaño">
+            <End Role="Daños" EntitySet="Daños" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FKEl" Association="Self.FKEl">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKELi" Association="Self.FKELi">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AparElec" EntitySet="AparElec" />
+          </AssociationSet>
+          <AssociationSet Name="FKElimi" Association="Self.FKElimi">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Daños" EntitySet="Daños" />
+          </AssociationSet>
+          <AssociationSet Name="FKElimina" Association="Self.FKElimina">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdApaElec" Association="Self.FKIdApaElec">
+            <End Role="AparElec" EntitySet="AparElec" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdClient" Association="Self.FKIdClient">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdContra" Association="Self.FKIdContra">
+            <End Role="Contrato" EntitySet="Contrato" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdContratos" Association="Self.FKIdContratos">
+            <End Role="Contrato" EntitySet="Contrato" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdCuarto" Association="Self.FKIdCuarto">
+            <End Role="Cuarto" EntitySet="Cuarto" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdMante" Association="Self.FKIdMante">
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdMora" Association="Self.FKIdMora">
+            <End Role="Mora" EntitySet="Mora" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdTipoPago" Association="Self.FKIdTipoPago">
+            <End Role="TipoPago" EntitySet="TipoPago" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FKMo" Association="Self.FKMo">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKMOd" Association="Self.FKMOd">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AparElec" EntitySet="AparElec" />
+          </AssociationSet>
+          <AssociationSet Name="FKModif" Association="Self.FKModif">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Daños" EntitySet="Daños" />
+          </AssociationSet>
+          <AssociationSet Name="FKModifica" Association="Self.FKModifica">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKMody" Association="Self.FKMody">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Controlador">
+          <Key>
+            <PropertyRef Name="IdControlador" />
+          </Key>
+          <Property Name="IdControlador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreControlador" Type="String" MaxLength="260" FixedLength="false" Unicode="true" />
+          <Property Name="IdModulo" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="Icono" Type="String" MaxLength="260" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Operaciones" Relationship="Self.FK_Controlador" FromRole="Controlador" ToRole="Operaciones" />
+          <NavigationProperty Name="Modulo" Relationship="Self.FK_Modulo" FromRole="Controlador" ToRole="Modulo" />
+        </EntityType>
+        <EntityType Name="Modulo">
+          <Key>
+            <PropertyRef Name="IdModulo" />
+          </Key>
+          <Property Name="IdModulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreModulo" Type="String" MaxLength="260" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Controlador" Relationship="Self.FK_Modulo" FromRole="Modulo" ToRole="Controlador" />
+        </EntityType>
+        <EntityType Name="Operaciones">
+          <Key>
+            <PropertyRef Name="IdOperacion" />
+          </Key>
+          <Property Name="IdOperacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreOperacion" Type="String" MaxLength="260" FixedLength="false" Unicode="false" />
+          <Property Name="IdControlador" Type="Int32" />
+          <NavigationProperty Name="Controlador" Relationship="Self.FK_Controlador" FromRole="Operaciones" ToRole="Controlador" />
+          <NavigationProperty Name="Rol_Operacion" Relationship="Self.FK_Operacion" FromRole="Operaciones" ToRole="Rol_Operacion" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Rol_Usuario" FromRole="Rol" ToRole="Usuario" />
+          <NavigationProperty Name="Rol_Operacion" Relationship="Self.FK_Rol1" FromRole="Rol" ToRole="Rol_Operacion" />
+        </EntityType>
+        <EntityType Name="Rol_Operacion">
+          <Key>
+            <PropertyRef Name="IdRolOperacion" />
+          </Key>
+          <Property Name="IdRolOperacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRol" Type="Int32" />
+          <Property Name="IdOperacion" Type="Int32" />
+          <NavigationProperty Name="Operaciones" Relationship="Self.FK_Operacion" FromRole="Rol_Operacion" ToRole="Operaciones" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Rol1" FromRole="Rol_Operacion" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="260" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="260" FixedLength="false" Unicode="true" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="260" FixedLength="false" Unicode="true" />
+          <Property Name="Contraseña" Type="String" MaxLength="260" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdRol" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Rol_Usuario" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="DañoCliente" Relationship="Self.FK_C_RE" FromRole="Usuario" ToRole="DañoCliente" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cr" FromRole="Usuario" ToRole="Cliente" />
+          <NavigationProperty Name="Cuarto" Relationship="Self.FK_CR_e" FromRole="Usuario" ToRole="Cuarto" />
+          <NavigationProperty Name="Mora" Relationship="Self.FK_CR_EAD" FromRole="Usuario" ToRole="Mora" />
+          <NavigationProperty Name="Pago" Relationship="Self.FK_Cr_EAdo" FromRole="Usuario" ToRole="Pago" />
+          <NavigationProperty Name="TipoPago" Relationship="Self.FK_CrEA_Do" FromRole="Usuario" ToRole="TipoPago" />
+          <NavigationProperty Name="Mantenimiento" Relationship="Self.FK_CrEado" FromRole="Usuario" ToRole="Mantenimiento" />
+          <NavigationProperty Name="DañoCliente1" Relationship="Self.FK_E_LI" FromRole="Usuario" ToRole="DañoCliente" />
+          <NavigationProperty Name="Cliente1" Relationship="Self.FK_El" FromRole="Usuario" ToRole="Cliente" />
+          <NavigationProperty Name="Cuarto1" Relationship="Self.FK_EL_i" FromRole="Usuario" ToRole="Cuarto" />
+          <NavigationProperty Name="Mora1" Relationship="Self.FK_ELI_M_INA" FromRole="Usuario" ToRole="Mora" />
+          <NavigationProperty Name="Pago1" Relationship="Self.FK_ElI_Mina" FromRole="Usuario" ToRole="Pago" />
+          <NavigationProperty Name="TipoPago1" Relationship="Self.FK_ElIMI_Na" FromRole="Usuario" ToRole="TipoPago" />
+          <NavigationProperty Name="Mantenimiento1" Relationship="Self.FK_ElImina" FromRole="Usuario" ToRole="Mantenimiento" />
+          <NavigationProperty Name="DañoCliente2" Relationship="Self.FK_M_OD" FromRole="Usuario" ToRole="DañoCliente" />
+          <NavigationProperty Name="Cliente2" Relationship="Self.FK_Mo" FromRole="Usuario" ToRole="Cliente" />
+          <NavigationProperty Name="Cuarto2" Relationship="Self.FK_MO_d" FromRole="Usuario" ToRole="Cuarto" />
+          <NavigationProperty Name="Mora2" Relationship="Self.FK_MOD_I_FICA" FromRole="Usuario" ToRole="Mora" />
+          <NavigationProperty Name="Pago2" Relationship="Self.FK_MoDI_fica" FromRole="Usuario" ToRole="Pago" />
+          <NavigationProperty Name="TipoPago2" Relationship="Self.FK_MoDIFI_ca" FromRole="Usuario" ToRole="TipoPago" />
+          <NavigationProperty Name="Mantenimiento2" Relationship="Self.FK_MoDifica" FromRole="Usuario" ToRole="Mantenimiento" />
+          <NavigationProperty Name="Contrato" Relationship="Self.FKAnu" FromRole="Usuario" ToRole="Contrato" />
+          <NavigationProperty Name="AditExt" Relationship="Self.FKCr" FromRole="Usuario" ToRole="AditExt" />
+          <NavigationProperty Name="AparElec" Relationship="Self.FKCRe" FromRole="Usuario" ToRole="AparElec" />
+          <NavigationProperty Name="Contrato1" Relationship="Self.FKCrea" FromRole="Usuario" ToRole="Contrato" />
+          <NavigationProperty Name="Daños" Relationship="Self.FKCread" FromRole="Usuario" ToRole="Daños" />
+          <NavigationProperty Name="DetalleMante" Relationship="Self.FKCreado" FromRole="Usuario" ToRole="DetalleMante" />
+          <NavigationProperty Name="AditExt1" Relationship="Self.FKEl" FromRole="Usuario" ToRole="AditExt" />
+          <NavigationProperty Name="AparElec1" Relationship="Self.FKELi" FromRole="Usuario" ToRole="AparElec" />
+          <NavigationProperty Name="Daños1" Relationship="Self.FKElimi" FromRole="Usuario" ToRole="Daños" />
+          <NavigationProperty Name="DetalleMante1" Relationship="Self.FKElimina" FromRole="Usuario" ToRole="DetalleMante" />
+          <NavigationProperty Name="AditExt2" Relationship="Self.FKMo" FromRole="Usuario" ToRole="AditExt" />
+          <NavigationProperty Name="AparElec2" Relationship="Self.FKMOd" FromRole="Usuario" ToRole="AparElec" />
+          <NavigationProperty Name="Daños2" Relationship="Self.FKModif" FromRole="Usuario" ToRole="Daños" />
+          <NavigationProperty Name="DetalleMante2" Relationship="Self.FKModifica" FromRole="Usuario" ToRole="DetalleMante" />
+          <NavigationProperty Name="Contrato2" Relationship="Self.FKMody" FromRole="Usuario" ToRole="Contrato" />
+        </EntityType>
+        <EntityType Name="AditExt">
+          <Key>
+            <PropertyRef Name="IdAditExt" />
+          </Key>
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="IdApaElec" Type="Int32" Nullable="false" />
+          <Property Name="IdAditExt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdContrato" Type="Int32" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FKCr" FromRole="AditExt" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FKEl" FromRole="AditExt" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FKMo" FromRole="AditExt" ToRole="Usuario" />
+          <NavigationProperty Name="Contrato" Relationship="Self.FKContrato" FromRole="AditExt" ToRole="Contrato" />
+          <NavigationProperty Name="AparElec" Relationship="Self.FKIdApaElec" FromRole="AditExt" ToRole="AparElec" />
+        </EntityType>
+        <EntityType Name="AparElec">
+          <Key>
+            <PropertyRef Name="IdApaElec" />
+          </Key>
+          <Property Name="NomApaElec" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="IdApaElec" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FKCRe" FromRole="AparElec" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FKELi" FromRole="AparElec" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FKMOd" FromRole="AparElec" ToRole="Usuario" />
+          <NavigationProperty Name="AditExt" Relationship="Self.FKIdApaElec" FromRole="AparElec" ToRole="AditExt" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="NomCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cedula" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelCliente" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Cr" FromRole="Cliente" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_El" FromRole="Cliente" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FK_Mo" FromRole="Cliente" ToRole="Usuario" />
+          <NavigationProperty Name="Contrato" Relationship="Self.FKIdClient" FromRole="Cliente" ToRole="Contrato" />
+        </EntityType>
+        <EntityType Name="Contrato">
+          <Key>
+            <PropertyRef Name="IdContrato" />
+          </Key>
+          <Property Name="FechaIni" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fechafin" Type="DateTime" Precision="0" />
+          <Property Name="Deposito" Type="Double" Nullable="false" />
+          <Property Name="IdCuarto" Type="Int32" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="IdContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="AnuladoPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FKAnu" FromRole="Contrato" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FKCrea" FromRole="Contrato" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FKMody" FromRole="Contrato" ToRole="Usuario" />
+          <NavigationProperty Name="AditExt" Relationship="Self.FKContrato" FromRole="Contrato" ToRole="AditExt" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FKIdClient" FromRole="Contrato" ToRole="Cliente" />
+          <NavigationProperty Name="Cuarto" Relationship="Self.FK_IdCuarto" FromRole="Contrato" ToRole="Cuarto" />
+          <NavigationProperty Name="Pago" Relationship="Self.FKIdContra" FromRole="Contrato" ToRole="Pago" />
+          <NavigationProperty Name="DañoCliente" Relationship="Self.FKIdContratos" FromRole="Contrato" ToRole="DañoCliente" />
+        </EntityType>
+        <EntityType Name="Cuarto">
+          <Key>
+            <PropertyRef Name="IdCuarto" />
+          </Key>
+          <Property Name="DescripCuarto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="EstadoRenta" Type="Boolean" />
+          <Property Name="EstadoMante" Type="Boolean" />
+          <Property Name="CodigoCuarto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCuarto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_CR_e" FromRole="Cuarto" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_EL_i" FromRole="Cuarto" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FK_MO_d" FromRole="Cuarto" ToRole="Usuario" />
+          <NavigationProperty Name="Contrato" Relationship="Self.FK_IdCuarto" FromRole="Cuarto" ToRole="Contrato" />
+          <NavigationProperty Name="DetalleMante" Relationship="Self.FKIdCuarto" FromRole="Cuarto" ToRole="DetalleMante" />
+        </EntityType>
+        <EntityType Name="DañoCliente">
+          <Key>
+            <PropertyRef Name="IdRegistro" />
+          </Key>
+          <Property Name="Costo" Type="Double" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdRegistro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdContrato" Type="Int32" />
+          <Property Name="IdDaño" Type="Int32" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_C_RE" FromRole="DañoCliente" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_E_LI" FromRole="DañoCliente" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FK_M_OD" FromRole="DañoCliente" ToRole="Usuario" />
+          <NavigationProperty Name="Contrato" Relationship="Self.FKIdContratos" FromRole="DañoCliente" ToRole="Contrato" />
+          <NavigationProperty Name="Daños" Relationship="Self.FKDaño" FromRole="DañoCliente" ToRole="Daños" />
+        </EntityType>
+        <EntityType Name="Daños">
+          <Key>
+            <PropertyRef Name="IdDaño" />
+          </Key>
+          <Property Name="DescripDaño" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdDaño" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FKCread" FromRole="Daños" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FKElimi" FromRole="Daños" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FKModif" FromRole="Daños" ToRole="Usuario" />
+          <NavigationProperty Name="DañoCliente" Relationship="Self.FKDaño" FromRole="Daños" ToRole="DañoCliente" />
+        </EntityType>
+        <EntityType Name="DetalleMante">
+          <Key>
+            <PropertyRef Name="IdDetaMante" />
+          </Key>
+          <Property Name="DescripDetalle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdCuarto" Type="Int32" />
+          <Property Name="IdMante" Type="Int32" />
+          <Property Name="IdDetaMante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FKCreado" FromRole="DetalleMante" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FKElimina" FromRole="DetalleMante" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FKModifica" FromRole="DetalleMante" ToRole="Usuario" />
+          <NavigationProperty Name="Cuarto" Relationship="Self.FKIdCuarto" FromRole="DetalleMante" ToRole="Cuarto" />
+          <NavigationProperty Name="Mantenimiento" Relationship="Self.FKIdMante" FromRole="DetalleMante" ToRole="Mantenimiento" />
+        </EntityType>
+        <EntityType Name="Mantenimiento">
+          <Key>
+            <PropertyRef Name="IdMante" />
+          </Key>
+          <Property Name="Descripcion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdMante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_CrEado" FromRole="Mantenimiento" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_ElImina" FromRole="Mantenimiento" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FK_MoDifica" FromRole="Mantenimiento" ToRole="Usuario" />
+          <NavigationProperty Name="DetalleMante" Relationship="Self.FKIdMante" FromRole="Mantenimiento" ToRole="DetalleMante" />
+        </EntityType>
+        <EntityType Name="Mora">
+          <Key>
+            <PropertyRef Name="IdMora" />
+          </Key>
+          <Property Name="PorcenMora" Type="Double" Nullable="false" />
+          <Property Name="IdMora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_CR_EAD" FromRole="Mora" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_ELI_M_INA" FromRole="Mora" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FK_MOD_I_FICA" FromRole="Mora" ToRole="Usuario" />
+          <NavigationProperty Name="Pago" Relationship="Self.FKIdMora" FromRole="Mora" ToRole="Pago" />
+        </EntityType>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="IdPago" />
+          </Key>
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MontoPago" Type="Double" />
+          <Property Name="IdTipoPago" Type="Int32" />
+          <Property Name="IdContrato" Type="Int32" />
+          <Property Name="IdMora" Type="Int32" />
+          <Property Name="IdPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Cr_EAdo" FromRole="Pago" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_ElI_Mina" FromRole="Pago" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FK_MoDI_fica" FromRole="Pago" ToRole="Usuario" />
+          <NavigationProperty Name="Contrato" Relationship="Self.FKIdContra" FromRole="Pago" ToRole="Contrato" />
+          <NavigationProperty Name="Mora" Relationship="Self.FKIdMora" FromRole="Pago" ToRole="Mora" />
+          <NavigationProperty Name="TipoPago" Relationship="Self.FKIdTipoPago" FromRole="Pago" ToRole="TipoPago" />
+        </EntityType>
+        <EntityType Name="TipoPago">
+          <Key>
+            <PropertyRef Name="IdTipoPago" />
+          </Key>
+          <Property Name="NomTipoPago" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreadoPor" Type="Int32" />
+          <Property Name="ModificaPor" Type="Int32" />
+          <Property Name="EliminaPor" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_CrEA_Do" FromRole="TipoPago" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_ElIMI_Na" FromRole="TipoPago" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FK_MoDIFI_ca" FromRole="TipoPago" ToRole="Usuario" />
+          <NavigationProperty Name="Pago" Relationship="Self.FKIdTipoPago" FromRole="TipoPago" ToRole="Pago" />
+        </EntityType>
+        <Association Name="FK_Controlador">
+          <End Role="Controlador" Type="Self.Controlador" Multiplicity="0..1" />
+          <End Role="Operaciones" Type="Self.Operaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Controlador">
+              <PropertyRef Name="IdControlador" />
+            </Principal>
+            <Dependent Role="Operaciones">
+              <PropertyRef Name="IdControlador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modulo">
+          <End Role="Modulo" Type="Self.Modulo" Multiplicity="0..1" />
+          <End Role="Controlador" Type="Self.Controlador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="IdModulo" />
+            </Principal>
+            <Dependent Role="Controlador">
+              <PropertyRef Name="IdModulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operacion">
+          <End Role="Operaciones" Type="Self.Operaciones" Multiplicity="0..1" />
+          <End Role="Rol_Operacion" Type="Self.Rol_Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operaciones">
+              <PropertyRef Name="IdOperacion" />
+            </Principal>
+            <Dependent Role="Rol_Operacion">
+              <PropertyRef Name="IdOperacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol_Usuario">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rol1">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Rol_Operacion" Type="Self.Rol_Operacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Rol_Operacion">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_C_RE">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cr">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CR_e">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cuarto">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CR_EAD">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mora" Type="Self.Mora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mora">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cr_EAdo">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrEA_Do">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="TipoPago" Type="Self.TipoPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="TipoPago">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrEado">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mantenimiento">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_E_LI">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_El">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EL_i">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cuarto">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ELI_M_INA">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mora" Type="Self.Mora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mora">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElI_Mina">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElIMI_Na">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="TipoPago" Type="Self.TipoPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="TipoPago">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ElImina">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mantenimiento">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_M_OD">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mo">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MO_d">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cuarto">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MOD_I_FICA">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mora" Type="Self.Mora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mora">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoDI_fica">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoDIFI_ca">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="TipoPago" Type="Self.TipoPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="TipoPago">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MoDifica">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Mantenimiento">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAnu">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="AnuladoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCr">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCRe">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AparElec" Type="Self.AparElec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AparElec">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCrea">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCread">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Daños" Type="Self.Daños" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Daños">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCreado">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="CreadoPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEl">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKELi">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AparElec" Type="Self.AparElec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AparElec">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKElimi">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Daños" Type="Self.Daños" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Daños">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKElimina">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="EliminaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMo">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMOd">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="AparElec" Type="Self.AparElec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AparElec">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKModif">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Daños" Type="Self.Daños" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Daños">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKModifica">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMody">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="ModificaPor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKContrato">
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contrato">
+              <PropertyRef Name="IdContrato" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="IdContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdApaElec">
+          <End Role="AparElec" Type="Self.AparElec" Multiplicity="1" />
+          <End Role="AditExt" Type="Self.AditExt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AparElec">
+              <PropertyRef Name="IdApaElec" />
+            </Principal>
+            <Dependent Role="AditExt">
+              <PropertyRef Name="IdApaElec" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdClient">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdCuarto">
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="0..1" />
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuarto">
+              <PropertyRef Name="IdCuarto" />
+            </Principal>
+            <Dependent Role="Contrato">
+              <PropertyRef Name="IdCuarto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdContra">
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contrato">
+              <PropertyRef Name="IdContrato" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdContratos">
+          <End Role="Contrato" Type="Self.Contrato" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contrato">
+              <PropertyRef Name="IdContrato" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="IdContrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdCuarto">
+          <End Role="Cuarto" Type="Self.Cuarto" Multiplicity="0..1" />
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuarto">
+              <PropertyRef Name="IdCuarto" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="IdCuarto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDaño">
+          <End Role="Daños" Type="Self.Daños" Multiplicity="0..1" />
+          <End Role="DañoCliente" Type="Self.DañoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Daños">
+              <PropertyRef Name="IdDaño" />
+            </Principal>
+            <Dependent Role="DañoCliente">
+              <PropertyRef Name="IdDaño" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdMante">
+          <End Role="Mantenimiento" Type="Self.Mantenimiento" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetalleMante" Type="Self.DetalleMante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mantenimiento">
+              <PropertyRef Name="IdMante" />
+            </Principal>
+            <Dependent Role="DetalleMante">
+              <PropertyRef Name="IdMante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdMora">
+          <End Role="Mora" Type="Self.Mora" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mora">
+              <PropertyRef Name="IdMora" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdMora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIdTipoPago">
+          <End Role="TipoPago" Type="Self.TipoPago" Multiplicity="0..1" />
+          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPago">
+              <PropertyRef Name="IdTipoPago" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdTipoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Contexto" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Controlador" EntityType="Self.Controlador" />
+          <EntitySet Name="Modulo" EntityType="Self.Modulo" />
+          <EntitySet Name="Operaciones" EntityType="Self.Operaciones" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="Rol_Operacion" EntityType="Self.Rol_Operacion" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="AditExt" EntityType="Self.AditExt" />
+          <EntitySet Name="AparElec" EntityType="Self.AparElec" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Contrato" EntityType="Self.Contrato" />
+          <EntitySet Name="Cuarto" EntityType="Self.Cuarto" />
+          <EntitySet Name="DañoCliente" EntityType="Self.DañoCliente" />
+          <EntitySet Name="Daños" EntityType="Self.Daños" />
+          <EntitySet Name="DetalleMante" EntityType="Self.DetalleMante" />
+          <EntitySet Name="Mantenimiento" EntityType="Self.Mantenimiento" />
+          <EntitySet Name="Mora" EntityType="Self.Mora" />
+          <EntitySet Name="Pago" EntityType="Self.Pago" />
+          <EntitySet Name="TipoPago" EntityType="Self.TipoPago" />
+          <AssociationSet Name="FK_Controlador" Association="Self.FK_Controlador">
+            <End Role="Controlador" EntitySet="Controlador" />
+            <End Role="Operaciones" EntitySet="Operaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modulo" Association="Self.FK_Modulo">
+            <End Role="Modulo" EntitySet="Modulo" />
+            <End Role="Controlador" EntitySet="Controlador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operacion" Association="Self.FK_Operacion">
+            <End Role="Operaciones" EntitySet="Operaciones" />
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol_Usuario" Association="Self.FK_Rol_Usuario">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rol1" Association="Self.FK_Rol1">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_C_RE" Association="Self.FK_C_RE">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cr" Association="Self.FK_Cr">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CR_e" Association="Self.FK_CR_e">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuarto" EntitySet="Cuarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CR_EAD" Association="Self.FK_CR_EAD">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mora" EntitySet="Mora" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cr_EAdo" Association="Self.FK_Cr_EAdo">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrEA_Do" Association="Self.FK_CrEA_Do">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="TipoPago" EntitySet="TipoPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrEado" Association="Self.FK_CrEado">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_E_LI" Association="Self.FK_E_LI">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_El" Association="Self.FK_El">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EL_i" Association="Self.FK_EL_i">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuarto" EntitySet="Cuarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ELI_M_INA" Association="Self.FK_ELI_M_INA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mora" EntitySet="Mora" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElI_Mina" Association="Self.FK_ElI_Mina">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElIMI_Na" Association="Self.FK_ElIMI_Na">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="TipoPago" EntitySet="TipoPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ElImina" Association="Self.FK_ElImina">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_M_OD" Association="Self.FK_M_OD">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mo" Association="Self.FK_Mo">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MO_d" Association="Self.FK_MO_d">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cuarto" EntitySet="Cuarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MOD_I_FICA" Association="Self.FK_MOD_I_FICA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mora" EntitySet="Mora" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoDI_fica" Association="Self.FK_MoDI_fica">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoDIFI_ca" Association="Self.FK_MoDIFI_ca">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="TipoPago" EntitySet="TipoPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MoDifica" Association="Self.FK_MoDifica">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FKAnu" Association="Self.FKAnu">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FKCr" Association="Self.FKCr">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKCRe" Association="Self.FKCRe">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AparElec" EntitySet="AparElec" />
+          </AssociationSet>
+          <AssociationSet Name="FKCrea" Association="Self.FKCrea">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FKCread" Association="Self.FKCread">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Daños" EntitySet="Daños" />
+          </AssociationSet>
+          <AssociationSet Name="FKCreado" Association="Self.FKCreado">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKEl" Association="Self.FKEl">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKELi" Association="Self.FKELi">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AparElec" EntitySet="AparElec" />
+          </AssociationSet>
+          <AssociationSet Name="FKElimi" Association="Self.FKElimi">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Daños" EntitySet="Daños" />
+          </AssociationSet>
+          <AssociationSet Name="FKElimina" Association="Self.FKElimina">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKMo" Association="Self.FKMo">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKMOd" Association="Self.FKMOd">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AparElec" EntitySet="AparElec" />
+          </AssociationSet>
+          <AssociationSet Name="FKModif" Association="Self.FKModif">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Daños" EntitySet="Daños" />
+          </AssociationSet>
+          <AssociationSet Name="FKModifica" Association="Self.FKModifica">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKMody" Association="Self.FKMody">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FKContrato" Association="Self.FKContrato">
+            <End Role="Contrato" EntitySet="Contrato" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdApaElec" Association="Self.FKIdApaElec">
+            <End Role="AparElec" EntitySet="AparElec" />
+            <End Role="AditExt" EntitySet="AditExt" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdClient" Association="Self.FKIdClient">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdCuarto" Association="Self.FK_IdCuarto">
+            <End Role="Cuarto" EntitySet="Cuarto" />
+            <End Role="Contrato" EntitySet="Contrato" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdContra" Association="Self.FKIdContra">
+            <End Role="Contrato" EntitySet="Contrato" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdContratos" Association="Self.FKIdContratos">
+            <End Role="Contrato" EntitySet="Contrato" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdCuarto" Association="Self.FKIdCuarto">
+            <End Role="Cuarto" EntitySet="Cuarto" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKDaño" Association="Self.FKDaño">
+            <End Role="Daños" EntitySet="Daños" />
+            <End Role="DañoCliente" EntitySet="DañoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdMante" Association="Self.FKIdMante">
+            <End Role="Mantenimiento" EntitySet="Mantenimiento" />
+            <End Role="DetalleMante" EntitySet="DetalleMante" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdMora" Association="Self.FKIdMora">
+            <End Role="Mora" EntitySet="Mora" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FKIdTipoPago" Association="Self.FKIdTipoPago">
+            <End Role="TipoPago" EntitySet="TipoPago" />
+            <End Role="Pago" EntitySet="Pago" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDStoreContainer" CdmEntityContainer="Contexto">
+          <EntitySetMapping Name="Controlador">
+            <EntityTypeMapping TypeName="BD.Controlador">
+              <MappingFragment StoreEntitySet="Controlador">
+                <ScalarProperty Name="IdControlador" ColumnName="IdControlador" />
+                <ScalarProperty Name="NombreControlador" ColumnName="NombreControlador" />
+                <ScalarProperty Name="IdModulo" ColumnName="IdModulo" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modulo">
+            <EntityTypeMapping TypeName="BD.Modulo">
+              <MappingFragment StoreEntitySet="Modulo">
+                <ScalarProperty Name="IdModulo" ColumnName="IdModulo" />
+                <ScalarProperty Name="NombreModulo" ColumnName="NombreModulo" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operaciones">
+            <EntityTypeMapping TypeName="BD.Operaciones">
+              <MappingFragment StoreEntitySet="Operaciones">
+                <ScalarProperty Name="IdOperacion" ColumnName="IdOperacion" />
+                <ScalarProperty Name="NombreOperacion" ColumnName="NombreOperacion" />
+                <ScalarProperty Name="IdControlador" ColumnName="IdControlador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="BD.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol_Operacion">
+            <EntityTypeMapping TypeName="BD.Rol_Operacion">
+              <MappingFragment StoreEntitySet="Rol_Operacion">
+                <ScalarProperty Name="IdRolOperacion" ColumnName="IdRolOperacion" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="IdOperacion" ColumnName="IdOperacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="BD.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AditExt">
+            <EntityTypeMapping TypeName="BD.AditExt">
+              <MappingFragment StoreEntitySet="AditExt">
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="IdApaElec" ColumnName="IdApaElec" />
+                <ScalarProperty Name="IdAditExt" ColumnName="IdAditExt" />
+                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AparElec">
+            <EntityTypeMapping TypeName="BD.AparElec">
+              <MappingFragment StoreEntitySet="AparElec">
+                <ScalarProperty Name="NomApaElec" ColumnName="NomApaElec" />
+                <ScalarProperty Name="IdApaElec" ColumnName="IdApaElec" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="BD.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="NomCliente" ColumnName="NomCliente" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="TelCliente" ColumnName="TelCliente" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contrato">
+            <EntityTypeMapping TypeName="BD.Contrato">
+              <MappingFragment StoreEntitySet="Contrato">
+                <ScalarProperty Name="FechaIni" ColumnName="FechaIni" />
+                <ScalarProperty Name="Fechafin" ColumnName="Fechafin" />
+                <ScalarProperty Name="Deposito" ColumnName="Deposito" />
+                <ScalarProperty Name="IdCuarto" ColumnName="IdCuarto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="AnuladoPor" ColumnName="AnuladoPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuarto">
+            <EntityTypeMapping TypeName="BD.Cuarto">
+              <MappingFragment StoreEntitySet="Cuarto">
+                <ScalarProperty Name="DescripCuarto" ColumnName="DescripCuarto" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="EstadoRenta" ColumnName="EstadoRenta" />
+                <ScalarProperty Name="EstadoMante" ColumnName="EstadoMante" />
+                <ScalarProperty Name="CodigoCuarto" ColumnName="CodigoCuarto" />
+                <ScalarProperty Name="IdCuarto" ColumnName="IdCuarto" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DañoCliente">
+            <EntityTypeMapping TypeName="BD.DañoCliente">
+              <MappingFragment StoreEntitySet="DañoCliente">
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+                <ScalarProperty Name="IdDaño" ColumnName="IdDaño" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Daños">
+            <EntityTypeMapping TypeName="BD.Daños">
+              <MappingFragment StoreEntitySet="Daños">
+                <ScalarProperty Name="DescripDaño" ColumnName="DescripDaño" />
+                <ScalarProperty Name="IdDaño" ColumnName="IdDaño" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleMante">
+            <EntityTypeMapping TypeName="BD.DetalleMante">
+              <MappingFragment StoreEntitySet="DetalleMante">
+                <ScalarProperty Name="DescripDetalle" ColumnName="DescripDetalle" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdCuarto" ColumnName="IdCuarto" />
+                <ScalarProperty Name="IdMante" ColumnName="IdMante" />
+                <ScalarProperty Name="IdDetaMante" ColumnName="IdDetaMante" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mantenimiento">
+            <EntityTypeMapping TypeName="BD.Mantenimiento">
+              <MappingFragment StoreEntitySet="Mantenimiento">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMante" ColumnName="IdMante" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mora">
+            <EntityTypeMapping TypeName="BD.Mora">
+              <MappingFragment StoreEntitySet="Mora">
+                <ScalarProperty Name="PorcenMora" ColumnName="PorcenMora" />
+                <ScalarProperty Name="IdMora" ColumnName="IdMora" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pago">
+            <EntityTypeMapping TypeName="BD.Pago">
+              <MappingFragment StoreEntitySet="Pago">
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="MontoPago" ColumnName="MontoPago" />
+                <ScalarProperty Name="IdTipoPago" ColumnName="IdTipoPago" />
+                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+                <ScalarProperty Name="IdMora" ColumnName="IdMora" />
+                <ScalarProperty Name="IdPago" ColumnName="IdPago" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPago">
+            <EntityTypeMapping TypeName="BD.TipoPago">
+              <MappingFragment StoreEntitySet="TipoPago">
+                <ScalarProperty Name="NomTipoPago" ColumnName="NomTipoPago" />
+                <ScalarProperty Name="IdTipoPago" ColumnName="IdTipoPago" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
