@@ -1,42 +1,267 @@
-﻿<!DOCTYPE html>
-<html>
+﻿﻿
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* Copyright (c) 2022 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+<!-- Breadcrumb-->
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>Sistema Apartamentos Vivas</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Dashboard/src/assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/Dashboard/src/assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Dashboard/src/assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Dashboard/src/assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Dashboard/src/assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Dashboard/src/assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Dashboard/src/assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Dashboard/src/assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Dashboard/src/assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Dashboard/src/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/Dashboard/src/assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Dashboard/src/assets/favicon/favicon-16x16.png">
+    @*Antes de la tragedia*@
+    <link rel="manifest" href="~/Dashboard/src/assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/Dashboard/src/assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendors styles-->
+    <link rel="stylesheet" href="~/Dashboard/dist/vendors/simplebar/css/simplebar.css">
+    <link rel="stylesheet" href="~/Dashboard/dist/css/vendors/simplebar.css">
+    <!-- Main styles for this application-->
+    <link href="~/Dashboard/dist/css/style.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics-->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        // Shared ID
+        gtag('config', 'UA-118965717-3');
+        // Bootstrap ID
+        gtag('config', 'UA-118965717-5');</script>
+
+    @*Mis estilos*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+
+
+    <!-- CSS de bootstrap-daterangepicker -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+
+    <!-- CSS de bootstrap-datetimepicker (dependencia de bootstrap-daterangepicker) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+    @*Bootsrap select*@
+
+
+    @*Line awesome*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/line-awesome/dist/line-awesome/css/line-awesome.min.css">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
+        <div class="sidebar-brand d-none d-md-flex">
+            <svg class="sidebar-brand-full" width="118" height="46" alt="VIVAS">
+                <use xlink:href="~/Media/logoB.png"></use>
+            </svg>
+            <svg class="sidebar-brand-narrow" width="46" height="46" alt="">
+                <use xlink:href="~"></use>
+            </svg>
+        </div>
+        <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
+
+
+            <li class="nav-title">Gestion</li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Cliente")">
+                    <i class="las la-user-tie" style="font-size: 1.5em; margin-right: 115px;"></i> Clientes
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index", "Contrato")">
+                    <i class="las la-file-contract" style="font-size: 1.5em; margin-right: 100px;"></i> Contratos
+                </a>
+            </li>
+
+            <li class="nav-item text-start">
+                <a class="nav-link" href="@Url.Action("Index", "Cuarto")">
+                    <i class="las la-home" style="font-size: 1.5em; margin-right: 115px;"></i> Cuartos
+                </a>
+            </li>
+
+            <li class="nav-item text-start">
+                <a class="nav-link" href="@Url.Action("Index", "Mantenimiento")">
+                    <i class="las la-wrench" style="font-size: 1.5em; margin-right: 60px;"></i> Mantenimiento
+                </a>
+            </li>
+
+            <li class="nav-title">Reportes</li>
+
+            <li class="nav-group" aria-expanded="false">
+                <a class="nav-link nav-group-toggle" href="#">
+                    <svg class="nav-icon">
+                        <i class="las la-file-contract" style="font-size: 1.5em; margin-right: 60px;"></i> Contrato
+                    </svg>
+                </a>
+                <ul class="nav-group-items" style="height: 0px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("IndexR1", "ReporteContratos")">
+                            <span class="nav-icon"><i class="las la-calendar"></i></span> Entre Fechas
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-group" aria-expanded="false">
+                <a class="nav-link nav-group-toggle" href="#">
+                    <svg class="nav-icon">
+                        <i class="las la-home" style="font-size: 1.5em; margin-right: 60px;"></i> Cuartos
+                    </svg>
+                </a>
+                <ul class="nav-group-items" style="height: 0px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "ReporteCuartos")">
+                            <span class="nav-icon"><i class="las la-house-damage"></i></span> Daño Cuartos
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+        <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
+    </div>
+    <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+        <header class="header header-sticky mb-4">
+            <div class="container-fluid">
+                <button class="header-toggler px-md-0 me-md-3" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
+                    <svg class="icon icon-lg">
+                        <use xlink:href="~/Dashboard/dist/vendors/coreui/icons/svg/free.svg#cil-menu"></use>
+                    </svg>
+                </button><a class="header-brand d-md-none" href="#">
+                    <svg width="118" height="46" alt="CoreUI Logo">
+                        <use xlink:href="~/Dashboard/src/assets/brand/coreui.svg#full"></use>
+                    </svg>
+                </a>
+                <ul class="header-nav d-none d-md-flex">
+                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"></a></li>
+                </ul>
+                <ul class="header-nav ms-auto">
+                </ul>
+                <ul class="header-nav ms-3">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <div class="avatar avatar-md"><img class="avatar-img" src="~/Dashboard/src/assets/img/avatars/8.jpg" alt="user@email.com"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end pt-0">
+                            <div class="dropdown-header bg-light py-2">
+                                <div class="fw-semibold">Cuenta</div>
+                            </div><a class="dropdown-item" href="@Url.Action("Index", "Home")">
+                                <svg class="icon me-2">
+                                    <use xlink:href="~/Dashboard/dist/vendors/coreui/icons/svg/free.svg#cil-bell"></use>
+                                </svg> Inicio<span class="badge badge-sm bg-info ms-2"></span>
+                            </a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">
+                                <svg class="icon me-2">
+                                    <use xlink:href="~/Dashboard/dist/vendors/coreui/icons/svg/free.svg#cil-account-logout"></use>
+                                </svg> Cerrar Sesion
+                            </a>
+                        </div>
+                    </li>
                 </ul>
             </div>
+            <div class="header-divider"></div>
+            <div class="container-fluid">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb my-0 ms-2">
+                        <li class="breadcrumb-item">
+                            <!-- if breadcrumb is single--><span></span>
+                        </li>
+                        <li class="breadcrumb-item active"><span></span></li>
+                    </ol>
+                </nav>
+            </div>
+        </header>
+        <div class="body flex-grow-1 px-3">
+            <div class="container-lg">
+                @RenderBody()
+            </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row text-muted">
+                    <div class="col-6 text-start">
+                        <p class="mb-0">
+                            <a class="text-muted"><strong>Sistema Control Apartamento Vivas</strong></a>								&copy;
+                        </p>
+                    </div>
+                    <div class="col-6 text-end">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="https://github.com/AJJCodes" target="_blank">Anthony J</a>
+                            </li>
+
+
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="https://github.com/Ernestnic8" target="_blank">Francisco C</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted" href="https://github.com/Christe06" target="_blank">Christian M</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="text-muted">4T3-CO</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <!-- CoreUI and necessary plugins-->
+    <script src="~/Dashboard/dist/vendors/coreui/coreui/js/coreui.bundle.min.js"></script>
+    @*Este carga las notificaciones*@
+    <script src="~/Dashboard/dist/vendors/simplebar/js/simplebar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>$('.selectpicker').selectpicker();</script>
+
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
