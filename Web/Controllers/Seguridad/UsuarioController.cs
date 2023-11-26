@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Filters;
 
 namespace Web.Controllers.Seguridad
 {
-    public class UsuarioController : Controller
+    [VerificaSession]
+    public class UsuarioController : BaseController
     {
-        // GET: Usuario
-        public ActionResult Index()
+        [AuthorizeUser(IdOperacion: 1)]
+        public ActionResult IndexUsuario()
         {
             return View();
         }

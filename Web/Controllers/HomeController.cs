@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Controllers.Seguridad;
+using Web.Filters;
 
 namespace Web.Controllers
 {
-    public class HomeController : Controller
+    [VerificaSession]
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
