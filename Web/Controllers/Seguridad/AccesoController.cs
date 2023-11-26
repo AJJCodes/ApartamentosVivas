@@ -45,7 +45,7 @@ namespace Web.Controllers.Seguridad
 
             Session["User"] = oUser;
             ViewBag.UserName = oUser.Nombre + " " + oUser.Apellidos;
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("Index", "Home");
         }
 
 

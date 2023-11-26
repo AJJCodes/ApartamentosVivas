@@ -42,7 +42,8 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics-->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
-    <script>window.dataLayer = window.dataLayer || [];
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
         function gtag() {
             dataLayer.push(arguments);
@@ -51,7 +52,8 @@
         // Shared ID
         gtag('config', 'UA-118965717-3');
         // Bootstrap ID
-        gtag('config', 'UA-118965717-5');</script>
+        gtag('config', 'UA-118965717-5');
+    </script>
 
     @*Mis estilos*@
     @Styles.Render("~/Content/css")
@@ -87,65 +89,31 @@
             </svg>
         </div>
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
+            @{ var activeController = ViewContext.RouteData.Values["controller"].ToString(); }
 
 
-            <li class="nav-title">Gestion</li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "Cliente")">
-                    <i class="las la-user-tie" style="font-size: 1.5em; margin-right: 115px;"></i> Clientes
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "Contrato")">
-                    <i class="las la-file-contract" style="font-size: 1.5em; margin-right: 100px;"></i> Contratos
-                </a>
-            </li>
-
-            <li class="nav-item text-start">
-                <a class="nav-link" href="@Url.Action("Index", "Cuarto")">
-                    <i class="las la-home" style="font-size: 1.5em; margin-right: 115px;"></i> Cuartos
-                </a>
-            </li>
-
-            <li class="nav-item text-start">
-                <a class="nav-link" href="@Url.Action("Index", "Mantenimiento")">
-                    <i class="las la-wrench" style="font-size: 1.5em; margin-right: 60px;"></i> Mantenimiento
-                </a>
-            </li>
-
-            <li class="nav-title">Reportes</li>
-
-            <li class="nav-group" aria-expanded="false">
-                <a class="nav-link nav-group-toggle" href="#">
-                    <svg class="nav-icon">
-                        <i class="las la-file-contract" style="font-size: 1.5em; margin-right: 60px;"></i> Contrato
-                    </svg>
-                </a>
-                <ul class="nav-group-items" style="height: 0px;">
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("IndexR1", "ReporteContratos")">
-                            <span class="nav-icon"><i class="las la-calendar"></i></span> Entre Fechas
-                        </a>
-                    </li>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Inserta tu código adaptado aquí -->
+                    @if (ViewBag.ModulesWithControllers != null)
+                    {
+                        foreach (var module in ViewBag.ModulesWithControllers)
+                        {
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">@module.Key</span>
+        </li> foreach (var controller in module.Value)
+                            {
+        <li class="menu-item @((activeController == controller.NombreControlador) ? "active" : "")">
+            <a href="@Url.Action(controller.NombreOperacion, controller.NombreControlador)" class="menu-link">
+                <i class="@controller.Icono"></i>
+                <div data-i18n="Basic">@controller.NombreControlador</div>
+            </a>
+        </li>}
+                        }
+                    }
                 </ul>
-            </li>
-
-            <li class="nav-group" aria-expanded="false">
-                <a class="nav-link nav-group-toggle" href="#">
-                    <svg class="nav-icon">
-                        <i class="las la-home" style="font-size: 1.5em; margin-right: 60px;"></i> Cuartos
-                    </svg>
-                </a>
-                <ul class="nav-group-items" style="height: 0px;">
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "ReporteCuartos")">
-                            <span class="nav-icon"><i class="las la-house-damage"></i></span> Daño Cuartos
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            </div>
 
         </ul>
         <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
@@ -259,7 +227,9 @@
     <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>$('.selectpicker').selectpicker();</script>
+    <script>
+        $('.selectpicker').selectpicker();
+    </script>
 
     @RenderSection("scripts", required: false)
 
