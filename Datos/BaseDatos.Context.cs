@@ -12,6 +12,8 @@ namespace Datos
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Contexto : DbContext
     {
@@ -43,5 +45,10 @@ namespace Datos
         public virtual DbSet<Mora> Mora { get; set; }
         public virtual DbSet<Pago> Pago { get; set; }
         public virtual DbSet<TipoPago> TipoPago { get; set; }
+    
+        public virtual ObjectResult<SpListarUsuariosRoles_Result> SpListarUsuariosRoles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpListarUsuariosRoles_Result>("SpListarUsuariosRoles");
+        }
     }
 }

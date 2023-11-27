@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BD.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BD.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Controlador">
           <Key>
             <PropertyRef Name="IdControlador" />
@@ -837,6 +837,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SpListarUsuariosRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Seguridad" />
         <EntityContainer Name="BDStoreContainer">
           <EntitySet Name="Controlador" EntityType="Self.Controlador" Schema="Seguridad" store:Type="Tables" />
           <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="Seguridad" store:Type="Tables" />
@@ -1065,8 +1066,7 @@
             <End Role="Contrato" EntitySet="Contrato" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BD" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2233,7 +2233,16 @@
             <End Role="TipoPago" EntitySet="TipoPago" />
             <End Role="Pago" EntitySet="Pago" />
           </AssociationSet>
+          <FunctionImport Name="SpListarUsuariosRoles" ReturnType="Collection(BD.SpListarUsuariosRoles_Result)" />
         </EntityContainer>
+        <ComplexType Name="SpListarUsuariosRoles_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="260" />
+          <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="260" />
+          <Property Type="String" Name="NombreUsuario" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="260" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="NombreRol" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2460,6 +2469,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SpListarUsuariosRoles" FunctionName="BD.Store.SpListarUsuariosRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.SpListarUsuariosRoles_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

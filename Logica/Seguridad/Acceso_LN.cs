@@ -75,7 +75,6 @@ namespace Logica.Seguridad
                 .GroupBy(co => co.ModuloNombre)
                 .ToDictionary(g => g.Key, g => g.Select(co => new Controlador_VM
                 {
-                    NombreOperacion = co.NombreOperacion,
                     NombreControlador = co.NombreControlador,
                     Icono = co.Icono
                 }).ToList());

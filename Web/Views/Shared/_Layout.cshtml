@@ -95,23 +95,23 @@
 
 
 
-                    <!-- Inserta tu código adaptado aquí -->
-                    @if (ViewBag.ModulesWithControllers != null)
+            <!-- Inserta tu código adaptado aquí -->
+            @if (ViewBag.ModulesWithControllers != null)
+            {
+                foreach (var module in ViewBag.ModulesWithControllers)
+                {
+                    <li class="menu-header small text-uppercase">@module.Key</li>
+                    foreach (var controller in module.Value)
                     {
-                        foreach (var module in ViewBag.ModulesWithControllers)
-                        {
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">@module.Key</span>
-        </li> foreach (var controller in module.Value)
-                            {
-        <li class="menu-item @((activeController == controller.NombreControlador) ? "active" : "")">
-            <a href="@Url.Action(controller.NombreOperacion, controller.NombreControlador)" class="menu-link">
-                <i class="@controller.Icono"></i>
-                <div data-i18n="Basic">@controller.NombreControlador</div>
-            </a>
-        </li>}
-                        }
+                        <li class="menu-item @((activeController == controller.NombreControlador) ? "active" : "")">
+                            <a href="@Url.Action("Index", controller.NombreControlador)" class="menu-link">
+                                <i class="@controller.Icono"></i>
+                                <div data-i18n="Basic">@controller.NombreControlador</div>
+                            </a>
+                        </li>
                     }
+                }
+            }
 
 
 

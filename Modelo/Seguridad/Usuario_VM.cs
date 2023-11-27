@@ -18,4 +18,14 @@ namespace Modelo.Seguridad
         public Nullable<int> IdRol { get; set; }
         public bool Activo { get; set; }
     }
+
+    public class UsuarioRoles_VM
+    {
+        public string Nombre { get; set; }
+        public string Apellidos { get; set; }
+        public string NombreUsuario { get; set; }
+        public string Email { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string NombreRol { get; set; }
+    }
 }

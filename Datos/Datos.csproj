@@ -117,6 +117,9 @@
     <Compile Include="Rol_Operacion.cs">
       <DependentUpon>BaseDatos.tt</DependentUpon>
     </Compile>
+    <Compile Include="SpListarUsuariosRoles_Result.cs">
+      <DependentUpon>BaseDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="TipoPago.cs">
       <DependentUpon>BaseDatos.tt</DependentUpon>
     </Compile>
