@@ -837,7 +837,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="SpListarUsuariosRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Seguridad" />
+        <Function Name="SpListarRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Seguridad">
+          <Parameter Name="EstadoRol" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SpListarUsuariosRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Seguridad">
+          <Parameter Name="EstadoUsuario" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="BDStoreContainer">
           <EntitySet Name="Controlador" EntityType="Self.Controlador" Schema="Seguridad" store:Type="Tables" />
           <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="Seguridad" store:Type="Tables" />
@@ -2233,7 +2238,12 @@
             <End Role="TipoPago" EntitySet="TipoPago" />
             <End Role="Pago" EntitySet="Pago" />
           </AssociationSet>
-          <FunctionImport Name="SpListarUsuariosRoles" ReturnType="Collection(BD.SpListarUsuariosRoles_Result)" />
+          <FunctionImport Name="SpListarUsuariosRoles" ReturnType="Collection(BD.SpListarUsuariosRoles_Result)" >
+          <Parameter Name="EstadoUsuario" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SpListarRoles" ReturnType="Collection(BD.SpListarRoles_Result)">
+            <Parameter Name="EstadoRol" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SpListarUsuariosRoles_Result">
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="260" />
@@ -2241,6 +2251,11 @@
           <Property Type="String" Name="NombreUsuario" Nullable="true" MaxLength="90" />
           <Property Type="String" Name="Email" Nullable="true" MaxLength="260" />
           <Property Type="DateTime" Name="FechaCreacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="NombreRol" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SpListarRoles_Result">
+          <Property Type="Int32" Name="IdRol" Nullable="false" />
           <Property Type="String" Name="NombreRol" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
@@ -2477,6 +2492,15 @@
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpListarRoles" FunctionName="BD.Store.SpListarRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.SpListarRoles_Result">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
               </ComplexTypeMapping>
             </ResultMapping>

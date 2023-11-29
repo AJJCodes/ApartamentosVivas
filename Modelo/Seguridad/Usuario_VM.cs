@@ -27,5 +27,6 @@ namespace Modelo.Seguridad
         public string Email { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string NombreRol { get; set; }
+        public int IdUsuario { get; set; }
     }
 }

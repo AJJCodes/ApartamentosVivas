@@ -1,308 +1,261 @@
 ﻿$(document).ready(function () {
-    console.log("Algo cache");
-    var editarUrl = "/Cliente/ModificarCliente";
 
-
-    Componente :{
-        UrlControlador: "/Usuario/"
-    }
-
-
-    function ObtenerUsuarios() {
-
-    }
-
-
-    /*    $('.selectpicker').selectpicker();*/
-
-    //Lo que sucede al hacerle click
-    function format(d) {
-        return (
-            '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
-            '<tr>' +
-            '<td>N° Cuarto:</td>' +
-            '<td>' + d.CodigoCuarto + '</td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td>Descripcion:</td>' +
-            '<td>' + d.DescripCuarto + '</td>' +
-            '</tr>' +
-            '</table>'
-        );
-    }
-
-    //Estilo CSS de los botones
-    var style = document.createElement('style');
-    style.innerHTML = `
-    td.details-control {
-        text-align: center;
-        width: 20px;
-    }
-
-    td.details-control::before {
-        height: 1em;
-        width: 1em;
-        margin-top: -0.5em;
-        display: inline-block;
-        color: white;
-        border: 0.15em solid white;
-        border-radius: 1em;
-        box-shadow: 0 0 0.2em #444;
-        box-sizing: content-box;
-        text-align: center;
-        text-indent: 0 !important;
-        font-family: "Courier New",Courier,monospace;
-        line-height: 1em;
-        content: '+';
-        background-color: #31b131;
-    }
-
-    tr.shown td.details-control::before {
-        content: '-';
-        color: white;
-        background-color: #F44336; /* Rojo */
-    }
-`;
-
-    document.head.appendChild(style);
-
-
-
-    $('#TablaDeCliente').on('click', '.editar-btn', function () {
-        var idCliente = $(this).data('idcliente');
-        $.get("/Cliente/ObtenerClienteycontratoPorId", { IdCliente: idCliente }, function (html) {
-            $('#DivTablaCliente').hide();
-            $("#DivModificarClienteContrato").html(html);
-            $('#DivModificarClienteContrato').show();
-
-            // Reinicializar el selectpicker después de agregar el contenido
-            $('.selectpicker').selectpicker();
-        }).fail(function (error) {
-            console.error("Error al obtener los datos del registro:", error);
-
-            Swal.fire({
-                icon: 'error',
-                title: 'Error al obtener los datos del registro',
-                text: 'Ha ocurrido un error al intentar obtener los datos del registro. Por favor, inténtalo de nuevo.',
-                showConfirmButton: true
-            });
-
-        });
+    //Validaciones
+    $("#AgregarClienteyContratoForm").validate({
+        rules: {
+            NombrePersona: {
+                required: true,
+                minlength: 3
+            },
+            Apellido: {
+                required: true,
+                minlength: 3
+            },
+            NombreUsuario: {
+                required: true,
+                remote: {
+                    url: Componente.UrlControlador +'ValidarUsuario',
+                    type: 'post',
+                    data: {
+                        Usuario: function () {
+                            return $('#NombreUsuario').val();
+                        }
+                    }
+                }
+            },
+            CampoContraseña: {
+                required: true,
+                minlength: 8
+            },
+            Correo: {
+                required: true,
+                email: true,
+                remote: {
+                    url: Componente.UrlControlador +'ValidarCorreo',
+                    type: 'post',
+                    data: {
+                        Cedula: function () {
+                            return $('#Correo').val();
+                        }
+                    }
+                }
+            },
+            IdCuarto: {
+                required: true
+            }
+        },
+        messages: {
+            NombrePersona: {
+                required: "Por favor ingrese su nombre",
+                minlength: "El nombre debe tener al menos 3 caracteres"
+            },
+            Apellido: {
+                required: "Por favor ingrese su apellido",
+                minlength: "El apellido debe tener al menos 3 caracteres"
+            },
+            NombreUsuario: {
+                required: "Por favor ingrese su cédula",
+                remote: "Esa cedula ya esta registrada en el sistema"
+            },
+            TelefonoCliente: {
+                required: "Por favor ingrese su número de teléfono",
+                minlength: "El número de teléfono debe tener 8 dígitos",
+                maxlength: "El número de teléfono debe tener 8 dígitos",
+                digits: "El número de teléfono debe contener solo números"
+            },
+            Correo: {
+                required: "Por favor ingrese su correo electrónico",
+                email: "Por favor ingrese un correo electrónico válido",
+                remote: "Ese Correo ya esta registrado en el sistema"
+            },
+            IdCuarto: {
+                required: "Porfavor seleccione un cuarto"
+            }
+        },
+        highlight: function (element) {
+            $(element).addClass('is-invalid').removeClass('is-valid');
+        },
+        unhighlight: function (element) {
+            $(element).addClass('is-valid').removeClass('is-invalid');
+        }
     });
 
 
 
-    //Parte que alimenta la Tabla
-    var table = $('#TablaDeCliente').DataTable({
-        ajax: {
-            url: '/Cliente/ClientesJson',//Controlador Accion
-            dataSrc: ''
-        },
-        columns: [
-            {
-                className: 'details-control',
-                orderable: false,
-                data: null,
-                defaultContent: ''
+
+    window.Componente = {
+        UrlControlador: "/Usuario/"
+    };
+
+
+    ObtenerUsuarios();
+
+    function ObtenerUsuarios() {
+        var groupColumn = 4; // Cambiado a la posición de la columna 'NombreRol'
+
+        table = $('#TablaDeUsuarios').DataTable({
+            ajax: {
+                type: 'POST',
+                url: Componente.UrlControlador + '/ObtenerListaUsuarios',
+                data: { UsuariosActivos: true },
+                error: function (xhr, error, thrown) {
+                    console.log('Error en la solicitud AJAX:', error);
+                }
             },
-            { data: 'Nombre_Completo' },
-            { data: 'Cedula' },
-            { data: 'TelCliente' },
-            { data: 'correo' },
-            {
-                "data": "IdCliente",
-                "render": function (data, type, row) {
-                    return `
+            columns: [
+                {
+                    data: null,
+                    render: function (data, type, full, meta) {
+                        return data.Nombre + ' ' + data.Apellidos;
+                    },
+                    name: 'NombreCompleto',
+                    orderable: true,
+                    searchable: true
+                },
+                { data: 'NombreUsuario' },
+                { data: 'Email' },
+                {
+                    data: 'FechaCreacion',
+                    render: function (data) {
+                        var date = moment(parseInt(data.replace(/\/Date\((-?\d+)\)\//, '$1')));
+                        return date.format('DD/MM/YYYY');
+                    },
+                    type: 'date',
+                    orderData: [2]
+                },
+                { data: 'NombreRol' },
+                {
+                    "data": "IdUsuario",
+                    "render": function (data, type, row) {
+                        return `
                     <div class="d-flex justify-content-between">
                         <div class="btn-group">
-                            <button class="btn btn-primary editar-btn" data-idcliente="${row.IdCliente}">
+                            <button class="btn btn-primary editar-btn" data-idusuario="${row.IdCliente}">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
 
-                            <button class="btn btn-danger eliminar-btn" data-idcliente="${row.IdCliente}">
+                            <button class="btn btn-danger eliminar-btn" data-idusuario="${row.IdCliente}">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
                     </div>
                 `;
+                    }
                 }
-            }
-        ],
-        order: [[0, 'asc']],
-        responsive: true,
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-        },
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                text: "Nuevo",
-                className: "btn btn-primary",
-                action: function (e, dt, node, config) {
-                    $('#DivTablaCliente').hide(); // Ocultar el div de la tabla
-                    ObtenerCuartos();
-                    $('#DivAgregarCliente').show(); // Mostrar el div del formulario de agregar cliente
-                }
+            ],
+            columnDefs: [{ visible: false, targets: groupColumn }],
+            order: [[groupColumn, 'asc']],
+            drawCallback: function (settings) {
+                var api = this.api();
+                var rows = api.rows({ page: 'current' }).nodes();
+                var last = null;
+
+                api.column(groupColumn, { page: 'current' })
+                    .data()
+                    .each(function (group, i) {
+                        if (last !== group) {
+                            $(rows)
+                                .eq(i)
+                                .before(
+                                    '<tr class="group"><td colspan="6">' + // Ajustado a 6 columnas
+                                    group +
+                                    '</td></tr>'
+                                );
+
+                            last = group;
+                        }
+                    });
             },
-            {
-                extend: 'csv',
-                exportOptions: {
-                    columns: [1, 2, 3, 4]
-                }
+            responsive: true,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
             },
-            {
-                extend: 'excel',
-                exportOptions: {
-                    columns: [1, 2, 3, 4]
-                }
-            },
-            {
-                extend: 'pdf',
-                exportOptions: {
-                    columns: [1, 2, 3, 4]
-                }
-            },
-            {
-                extend: 'print',
-                exportOptions: {
-                    columns: [1, 2, 3, 4]
-                }
-            }
-        ]
-    });
-
-
-    //Switch
-    const checkbox = document.getElementById('EstadoCliente');
-    const label = document.querySelector('label[for="EstadoCliente"]');
-
-    //Cambia el texto
-    checkbox.addEventListener('change', function () {
-        if (this.checked) {
-            label.textContent = 'Clientes activos';
-        } else {
-            label.textContent = 'Clientes inactivos';
-        }
-    });
-
-    //Controlador de los botones de mas Informacion
-    $('#TablaDeCliente tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row(tr);
-
-        if (row.child.isShown()) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        } else {
-            // Open this row
-            row.child(format(row.data())).show();
-            tr.addClass('shown');
-        }
-    });
-
-    $('#cancelButton').click(function () {
-
-        // Ocultar el div de agregar cliente
-        $('#DivAgregarCliente').hide();
-
-        // Mostrar el div de la tabla de clientes
-        $('#DivTablaCliente').show();
-
-        // Limpiar el formulario
-        $('#AgregarClienteyContratoForm')[0].reset();
-    });
-
-    $('#AgregarClienteyContratoForm').submit(function (event) {
-        // Evita que el formulario se envíe automáticamente
-        event.preventDefault();
-
-        // Verifica si el formulario es válido utilizando jQuery Validation Plugin
-        if ($('#AgregarClienteyContratoForm').valid()) {
-            // Realiza aquí la lógica que deseas ejecutar al enviar el formulario
-
-            // Ejemplo de llamada a la función "AgregarClienteyContrato" en tu controlador:
-            $.ajax({
-                url: '/Cliente/AgregarClienteyContrato',
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function (response) {
-                    if (response.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Éxito',
-                            text: 'El cliente y contrato se agregaron exitosamente',
-                            showConfirmButton: true, // Muestra el botón "OK"
-                        }).then(function () {
-                            $('#DivAgregarCliente').hide();
-                            $('#TablaDeCliente').DataTable().ajax.reload();
-                            $('#DivTablaCliente').show();
-                            // Limpiar el formulario
-                            $('#AgregarClienteyContratoForm')[0].reset();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Hubo un error al agregar el cliente y contrato'
-                        });
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    text: '<i class="fas fa-plus"></i> Nuevo',
+                    className: "btn btn-primary",
+                    action: function (e, dt, node, config) {
+                        $('#DivTablaUsuario').hide(); // Ocultar el div de la tabla
+                        ObtenerRoles();
+                        $('#DivAgregarUsuario').show(); // Mostrar el div del formulario de agregar cliente
                     }
                 },
-                error: function () {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Hubo un error al enviar el formulario'
-                    });
-                }
-            });
-        }
-    });
-
-    $('#TablaDeCliente').on('click', '.eliminar-btn', function () {
-        var idCliente = $(this).data('idcliente');
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: 'Esta acción eliminará el registro permanentemente.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
-        }).then(function (result) {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '/Cliente/EliminarCliente',
-                    type: 'POST',
-                    data: { IdCliente: idCliente },
-                    success: function (response) {
-                        if (response.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Éxito',
-                                text: 'El Registro ha sido eliminado correctamente.',
-                                showConfirmButton: true
-                            }).then(function () {
-                                $('#TablaDeCliente').DataTable().ajax.reload();
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: 'Hubo un error al eliminar el cuarto.'
-                            });
-                        }
-                    },
-                    error: function () {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Hubo un error al enviar la solicitud de eliminación del Registro.'
-                        });
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4]
                     }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4]
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4]
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4]
+                    }
+                }
+            ]
+        });
+
+        $('#TablaDeUsuarios tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
+                table.order([groupColumn, 'desc']).draw();
+            } else {
+                table.order([groupColumn, 'asc']).draw();
+            }
+        });
+    }
+
+
+    function ObtenerRoles() {
+        $.ajax({
+            url: Componente.UrlControlador + "ObtenerListaRoles",
+            type: "POST",
+            dataType: "json",
+            data: { RolesActivos: true },
+            success: function (data) {
+                var $IdRol = $('#IdRol');
+                $IdRol.empty();
+
+                $IdRol.append('<option value=""></option>');
+
+                $.each(data.data, function (index, rol) {
+                    $IdRol.append('<option value="' + rol.IdRol + '">' + rol.NombreRol + '</option>');
+                });
+
+                $IdRol.selectpicker('refresh');
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.error("Error al obtener la lista de roles", errorThrown);
+
+                // Obtener el mensaje de error del servidor si está disponible
+                var errorMessage = "";
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    errorMessage = xhr.responseJSON.error;
+                }
+
+                // Mostrar SweetAlert con el mensaje de error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: errorMessage
                 });
             }
         });
-    });
+    }
+
+
+
 });

@@ -103,8 +103,9 @@
                     <li class="menu-header small text-uppercase">@module.Key</li>
                     foreach (var controller in module.Value)
                     {
-                        <li class="menu-item @((activeController == controller.NombreControlador) ? "active" : "")">
-                            <a href="@Url.Action("Index", controller.NombreControlador)" class="menu-link">
+
+                        <li class="nav-item @((activeController == controller.NombreControlador) ? "active" : "")">
+                            <a href="@Url.Action("Index", controller.NombreControlador)" class="nav-link">
                                 <i class="@controller.Icono"></i>
                                 <div data-i18n="Basic">@controller.NombreControlador</div>
                             </a>

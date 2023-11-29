@@ -1,6 +1,4 @@
-﻿﻿
-@{ ViewBag.Title = "TablaCliente"; }
-
+﻿
 
 @* Estilo del error *@
 <style>
@@ -21,11 +19,11 @@
     <table id="TablaDeUsuarios" class="table-responsive table align-middle mb-0 bg-white w-100 table table-striped table-hover table-bordered rounded-2">
         <thead class="bg-light">
             <tr>
-                <th></th> @*este es el espacio del boton*@
                 <th>Nombre Completo</th>
-                <th>Cédula</th>
-                <th>Teléfono</th>
+                <th>Usuario</th>
                 <th>Correo electrónico</th>
+                <th>Fecha Creacion</th>
+                <th>Rol</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -40,13 +38,13 @@
 <div id="DivAgregarUsuario" style="display:none" class="container shadow-lg p-4">
     <form class="row" id="AgregarUsuario">
 
-        <p class="text-start my-3 fw-bold fs-4">Datos Usuario</p>
+        <p class="text-start my-3 fw-bold fs-4">Datos Personales</p>
 
         <!-- Lado izquierdo -->
 
         <div class="col-6">
-            <label for="NombreCliente" class="form-label">Nombre:</label>
-            <input type="text" class="form-control" id="NombreCliente" name="NombreCliente">
+            <label for="NombrePersona" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="NombrePersona" name="NombrePersona">
             <div class="invalid-feedback"></div>
         </div>
 
@@ -60,16 +58,27 @@
 
         </div>
 
+        <div class=" p-4">
+            <hr style="border: 2PX solid BLACK" />
+        </div>
 
-        <div class="col-6">
-            <label for="Cedula" class="form-label">Cedula:</label>
-            <input type="text" class="form-control" id="Cedula" name="Cedula" remote="@Url.Action("ValidarCedula", "Cliente")">
+        <p class="text-start my-3 fw-bold fs-4">Datos Usuario</p>
+
+        <div class="col-lg-12">
+            <label for="NombreUsuario" class="form-label">Usuario:</label>
+            <input type="text" class="form-control" id="NombreUsuario" name="NombreUsuario" remote="@Url.Action("ValidarCedula", "Cliente")">
             <div class="invalid-feedback"></div>
         </div>
 
         <div class="col-6">
-            <label for="TelefonoCliente" class="form-label">Celular:</label>
-            <input type="tel" class="form-control" id="TelefonoCliente" name="TelefonoCliente">
+            <label for="CampoContraseña" class="form-label">Contraseña: </label>
+            <input type="password" class="form-control" id="CampoContraseña" name="CampoContraseña">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-6">
+            <label for="CampoConfirmarContraseña" class="form-label">Confirme Contraseña: </label>
+            <input type="password" class="form-control" id="CampoConfirmarContraseña" name="CampoConfirmarContraseña">
             <div class="invalid-feedback"></div>
         </div>
 
@@ -80,51 +89,18 @@
         </div>
 
 
-        <div class=" p-4">
-            <hr style="border: 2PX solid BLACK" />
-        </div>
-
-
-        <p class="text-start my-3 fw-bold fs-4">Datos de Contrato</p>
-
-
-        <div class="col-6" style="margin-bottom: 20px;">
-            <label for="Deposito" class="form-label">Deposito Inical:</label>
-            <input type="number" class="form-control" id="Deposito" name="Deposito">
-            <div class="invalid-feedback"></div>
-        </div>
-
         <div class="col-6">
             <div class="">
-                <label for="IdCargo" class="form-label">Cuarto:</label>
+                <label for="IdRol" class="form-label">Rol:</label>
                 <div class="dropdown">
-                    <select class="selectpicker form-control" select data-live-search="true" data-live-search-style="startsWith" id="IdCuarto" name="IdCuarto" aria-label="Seleccionar">
+                    <select class="selectpicker form-control" select data-live-search="true" data-live-search-style="startsWith" id="IdRol" name="IdRol" aria-label="Seleccionar">
                     </select>
                     <div class="invalid-feedback"></div>
-                    <div class="dropdown-menu" aria-labelledby="IdCuarto">
+                    <div class="dropdown-menu" aria-labelledby="IdRol">
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <div class="col-6">
-            <label for="FechaInicio" class="form-label">Fecha de Inicio de Contrato</label>
-            <input type="date" name="FechaInicio" id="FechaInicio" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="w-100 form-control" />
-        </div>
-
-        <div class="col-6 mb-3">
-            <label for="FechaFin" class="form-label">Fecha de Fin de Contrato</label>
-            <input type="date" name="FechaFin" id="FechaFin" class="w-100 form-control" />
-        </div>
-
-
-        <div style="text-align: right; background-color: #D3CECE;" class="p-2">
-            <button type="submit" class="btn btn-primary"><i class="las la-save"></i> Agregar</button>
-            <button id="cancelButton" type="button" class="btn btn-danger"><i class="las la-undo"></i> Cancelar</button>
-        </div>
-
-
     </form>
 </div>
 
@@ -133,7 +109,5 @@
 </div>
 
 @section scripts{
-    <!-- Configuración de la tabla de Cargos -->
-    <script src="~/Scripts/Cliente/Validaciones.js"></script>
-    <script type="text/javascript" src="~/Scripts/Cliente/Index.js"></script>
+    <script src="~/Scripts/JSvistas/Seguridad/Usuario/Index.js"></script>
 }

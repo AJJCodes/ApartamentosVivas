@@ -46,9 +46,22 @@ namespace Datos
         public virtual DbSet<Pago> Pago { get; set; }
         public virtual DbSet<TipoPago> TipoPago { get; set; }
     
-        public virtual ObjectResult<SpListarUsuariosRoles_Result> SpListarUsuariosRoles()
+        public virtual ObjectResult<SpListarUsuariosRoles_Result> SpListarUsuariosRoles(Nullable<bool> estadoUsuario)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpListarUsuariosRoles_Result>("SpListarUsuariosRoles");
+            var estadoUsuarioParameter = estadoUsuario.HasValue ?
+                new ObjectParameter("EstadoUsuario", estadoUsuario) :
+                new ObjectParameter("EstadoUsuario", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpListarUsuariosRoles_Result>("SpListarUsuariosRoles", estadoUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<SpListarRoles_Result> SpListarRoles(Nullable<bool> estadoRol)
+        {
+            var estadoRolParameter = estadoRol.HasValue ?
+                new ObjectParameter("EstadoRol", estadoRol) :
+                new ObjectParameter("EstadoRol", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpListarRoles_Result>("SpListarRoles", estadoRolParameter);
         }
     }
 }
