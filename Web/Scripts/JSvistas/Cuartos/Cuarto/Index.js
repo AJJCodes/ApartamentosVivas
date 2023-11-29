@@ -35,24 +35,25 @@
 
 
     window.Componente = {
-        UrlControlador: "/Roles/"
+        UrlControlador: "/Cuartos/"
     };
 
 
     ObtenerRoles();
 
     function ObtenerRoles() {
-        table = $('#TablaDeRoles').DataTable({
+        table = $('#TablaDeCuartos').DataTable({
             ajax: {
                 type: 'POST',
-                url: Componente.UrlControlador + '/ObtenerListaRoles',
+                url: Componente.UrlControlador + '/ObtenerListaCuartos',
                 data: { UsuariosActivos: true },
                 error: function (xhr, error, thrown) {
                     console.log('Error en la solicitud AJAX:', error);
                 }
             },
             columns: [
-                { data: 'NombreRol' },
+                { data: 'DescripCuarto' },
+                { data: 'CodigoCuarto' },
                 {
                     "data": "IdRol",
                     "render": function (data, type, row) {
@@ -83,7 +84,7 @@
                     className: "btn btn-primary",
                     action: function (e, dt, node, config) {
                         $('#DivTablaUsuario').hide(); // Ocultar el div de la tabla
-                        ObtenerRoles();
+/*                        ObtenerRoles();*/
                         $('#DivAgregarUsuario').show(); // Mostrar el div del formulario de agregar cliente
                     }
                 },

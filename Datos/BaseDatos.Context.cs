@@ -63,5 +63,10 @@ namespace Datos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpListarRoles_Result>("SpListarRoles", estadoRolParameter);
         }
+    
+        public virtual ObjectResult<spConseguirCuartos_Result> spConseguirCuartos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConseguirCuartos_Result>("spConseguirCuartos");
+        }
     }
 }

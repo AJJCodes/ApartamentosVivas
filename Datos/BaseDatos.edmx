@@ -843,6 +843,7 @@
         <Function Name="SpListarUsuariosRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Seguridad">
           <Parameter Name="EstadoUsuario" Type="bit" Mode="In" />
         </Function>
+        <Function Name="spConseguirCuartos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas" />
         <EntityContainer Name="BDStoreContainer">
           <EntitySet Name="Controlador" EntityType="Self.Controlador" Schema="Seguridad" store:Type="Tables" />
           <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="Seguridad" store:Type="Tables" />
@@ -2242,8 +2243,9 @@
           <Parameter Name="EstadoUsuario" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SpListarRoles" ReturnType="Collection(BD.SpListarRoles_Result)">
-            <Parameter Name="EstadoRol" Mode="In" Type="Boolean" />
+          <Parameter Name="EstadoRol" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="spConseguirCuartos" ReturnType="Collection(BD.spConseguirCuartos_Result)" />
         </EntityContainer>
         <ComplexType Name="SpListarUsuariosRoles_Result">
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="260" />
@@ -2257,6 +2259,17 @@
         <ComplexType Name="SpListarRoles_Result">
           <Property Type="Int32" Name="IdRol" Nullable="false" />
           <Property Type="String" Name="NombreRol" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="spConseguirCuartos_Result">
+          <Property Type="String" Name="DescripCuarto" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Costo" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoRenta" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoMante" Nullable="true" />
+          <Property Type="String" Name="CodigoCuarto" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="IdCuarto" Nullable="false" />
+          <Property Type="Int32" Name="CreadoPor" Nullable="true" />
+          <Property Type="Int32" Name="ModificaPor" Nullable="true" />
+          <Property Type="Int32" Name="EliminaPor" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2502,6 +2515,21 @@
               <ComplexTypeMapping TypeName="BD.SpListarRoles_Result">
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConseguirCuartos" FunctionName="BD.Store.spConseguirCuartos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.spConseguirCuartos_Result">
+                <ScalarProperty Name="DescripCuarto" ColumnName="DescripCuarto" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="EstadoRenta" ColumnName="EstadoRenta" />
+                <ScalarProperty Name="EstadoMante" ColumnName="EstadoMante" />
+                <ScalarProperty Name="CodigoCuarto" ColumnName="CodigoCuarto" />
+                <ScalarProperty Name="IdCuarto" ColumnName="IdCuarto" />
+                <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+                <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
+                <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
