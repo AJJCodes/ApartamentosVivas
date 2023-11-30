@@ -172,5 +172,130 @@ namespace Datos
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConseguirCuartosDisponibles2_Result>("spConseguirCuartosDisponibles2");
         }
+    
+        public virtual int EliminarContratoConCliente(Nullable<int> idCliente, Nullable<int> anuladoPor)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            var anuladoPorParameter = anuladoPor.HasValue ?
+                new ObjectParameter("AnuladoPor", anuladoPor) :
+                new ObjectParameter("AnuladoPor", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarContratoConCliente", idClienteParameter, anuladoPorParameter);
+        }
+    
+        public virtual int spAgregarClienteYContrato(string nomCliente, string apellido, string cedula, string telCliente, string correo, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechafin, Nullable<decimal> deposito, Nullable<int> idCuarto, Nullable<int> creadoPor)
+        {
+            var nomClienteParameter = nomCliente != null ?
+                new ObjectParameter("NomCliente", nomCliente) :
+                new ObjectParameter("NomCliente", typeof(string));
+    
+            var apellidoParameter = apellido != null ?
+                new ObjectParameter("Apellido", apellido) :
+                new ObjectParameter("Apellido", typeof(string));
+    
+            var cedulaParameter = cedula != null ?
+                new ObjectParameter("Cedula", cedula) :
+                new ObjectParameter("Cedula", typeof(string));
+    
+            var telClienteParameter = telCliente != null ?
+                new ObjectParameter("TelCliente", telCliente) :
+                new ObjectParameter("TelCliente", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("correo", correo) :
+                new ObjectParameter("correo", typeof(string));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechafinParameter = fechafin.HasValue ?
+                new ObjectParameter("Fechafin", fechafin) :
+                new ObjectParameter("Fechafin", typeof(System.DateTime));
+    
+            var depositoParameter = deposito.HasValue ?
+                new ObjectParameter("Deposito", deposito) :
+                new ObjectParameter("Deposito", typeof(decimal));
+    
+            var idCuartoParameter = idCuarto.HasValue ?
+                new ObjectParameter("IdCuarto", idCuarto) :
+                new ObjectParameter("IdCuarto", typeof(int));
+    
+            var creadoPorParameter = creadoPor.HasValue ?
+                new ObjectParameter("CreadoPor", creadoPor) :
+                new ObjectParameter("CreadoPor", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAgregarClienteYContrato", nomClienteParameter, apellidoParameter, cedulaParameter, telClienteParameter, correoParameter, fechaIniParameter, fechafinParameter, depositoParameter, idCuartoParameter, creadoPorParameter);
+        }
+    
+        public virtual int spModificarClienteYContrato(Nullable<int> idCliente, Nullable<int> idContrato, string nomCliente, string apellido, string cedula, string telCliente, string correo, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechafin, Nullable<decimal> deposito, Nullable<int> idCuarto, Nullable<int> modificaPor)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            var idContratoParameter = idContrato.HasValue ?
+                new ObjectParameter("IdContrato", idContrato) :
+                new ObjectParameter("IdContrato", typeof(int));
+    
+            var nomClienteParameter = nomCliente != null ?
+                new ObjectParameter("NomCliente", nomCliente) :
+                new ObjectParameter("NomCliente", typeof(string));
+    
+            var apellidoParameter = apellido != null ?
+                new ObjectParameter("Apellido", apellido) :
+                new ObjectParameter("Apellido", typeof(string));
+    
+            var cedulaParameter = cedula != null ?
+                new ObjectParameter("Cedula", cedula) :
+                new ObjectParameter("Cedula", typeof(string));
+    
+            var telClienteParameter = telCliente != null ?
+                new ObjectParameter("TelCliente", telCliente) :
+                new ObjectParameter("TelCliente", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("correo", correo) :
+                new ObjectParameter("correo", typeof(string));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechafinParameter = fechafin.HasValue ?
+                new ObjectParameter("Fechafin", fechafin) :
+                new ObjectParameter("Fechafin", typeof(System.DateTime));
+    
+            var depositoParameter = deposito.HasValue ?
+                new ObjectParameter("Deposito", deposito) :
+                new ObjectParameter("Deposito", typeof(decimal));
+    
+            var idCuartoParameter = idCuarto.HasValue ?
+                new ObjectParameter("IdCuarto", idCuarto) :
+                new ObjectParameter("IdCuarto", typeof(int));
+    
+            var modificaPorParameter = modificaPor.HasValue ?
+                new ObjectParameter("ModificaPor", modificaPor) :
+                new ObjectParameter("ModificaPor", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarClienteYContrato", idClienteParameter, idContratoParameter, nomClienteParameter, apellidoParameter, cedulaParameter, telClienteParameter, correoParameter, fechaIniParameter, fechafinParameter, depositoParameter, idCuartoParameter, modificaPorParameter);
+        }
+    
+        public virtual ObjectResult<spmostrar_Result> spmostrar(Nullable<int> idcliente)
+        {
+            var idclienteParameter = idcliente.HasValue ?
+                new ObjectParameter("idcliente", idcliente) :
+                new ObjectParameter("idcliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spmostrar_Result>("spmostrar", idclienteParameter);
+        }
+    
+        public virtual ObjectResult<spConseguirClientes_Result> spConseguirClientes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConseguirClientes_Result>("spConseguirClientes");
+        }
     }
 }

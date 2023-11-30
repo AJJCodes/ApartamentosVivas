@@ -119,5 +119,180 @@ namespace Logica.Clientes
         }
 
         #endregion
+
+        #region Validar existencias
+        public bool VerificarExistenciaCorreo(string Correo)
+        {
+            // Buscar el elemento en la tabla correspondiente
+            var elemento = bd.Cliente.FirstOrDefault(e => e.correo == Correo);
+
+            // Verificar si el elemento existe en la tabla
+            if (elemento != null)
+            {
+                // El elemento ya existe en la tabla
+                return true;
+            }
+            else
+            {
+                // El elemento no existe en la tabla
+                return false;
+            }
+        }
+
+        public bool VerificarExistenciaCorreoConId(string Correo, int ID)
+        {
+            // Buscar el elemento en la tabla correspondiente
+            // verificar si el codigo existe
+            // el codigo pertenece a mi id?
+            // si pertenece devolver true para permitir edicion
+            // si no me pertenece false para no permitir
+
+            if (!VerificarExistenciaCorreo(Correo))
+            {
+                return true;
+            }
+
+            Cliente e = bd.Cliente.Find(ID);
+
+            if (e != null && e.correo == Correo)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool VerificarExistenciaCedula(string Cedula)
+        {
+            // Buscar el elemento en la tabla correspondiente
+            var elemento = bd.Cliente.FirstOrDefault(e => e.Cedula == Cedula);
+
+            // Verificar si el elemento existe en la tabla
+            if (elemento != null)
+            {
+                // El elemento ya existe en la tabla
+                return true;
+            }
+            else
+            {
+                // El elemento no existe en la tabla
+                return false;
+            }
+        }
+
+
+        public bool VerificarExistenciaCelular(string Celular)
+        {
+            // Buscar el elemento en la tabla correspondiente
+            var elemento = bd.Cliente.FirstOrDefault(e => e.TelCliente == Celular);
+
+            // Verificar si el elemento existe en la tabla
+            if (elemento != null)
+            {
+                // El elemento ya existe en la tabla
+                return true;
+            }
+            else
+            {
+                // El elemento no existe en la tabla
+                return false;
+            }
+        }
+
+
+
+
+        //Validaciones conjuntas (ID del cliente y otros datos)
+
+        public bool ValidarCedulaConID(string Cedula, int ID)
+        {
+            // verificar si el codigo existe
+            // el codigo pertenece a mi id?
+            // si pertenece devolver true para permitir edicion
+            // si no me pertenece false para no permitir
+
+            if (!VerificarExistenciaCedula(Cedula))
+            {
+                return true;
+            }
+
+            Cliente e = bd.Cliente.Find(ID);
+
+            if (e != null && e.Cedula == Cedula)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        #endregion\
+
+        #region CRUD
+        public bool AgregarClienteyContrato(ClienteContrato_VM e)
+        {
+            try
+            {
+                // Ejecuta el procedimiento almacenado
+                bd.spAgregarClienteYContrato(e.NombreCliente, e.Apellido, e.Cedula, e.TelefonoCliente, e.Correo, e.FechaInicio, e.FechaFin, e.Deposito, e.IdCuarto,1);
+
+                // Guarda los cambios en la base de datos
+                bd.SaveChanges();
+
+                // Si no se producen errores, devuelve true
+                return true;
+            }
+            catch (Exception)
+            {
+                // Si ocurre un error, registra el mensaje de error (si es necesario) y devuelve false
+                return false;
+            }
+        }
+
+        public bool ModificarClienteyContrato(ClienteContrato_VM e)
+        {
+            try
+            {
+                // Ejecuta el procedimiento almacenado
+                bd.spModificarClienteYContrato(e.IdCliente, e.IdContrato, e.NombreCliente, e.Apellido, e.Cedula, e.TelefonoCliente, e.Correo, e.FechaInicio, e.FechaFin, e.Deposito, e.IdCuarto,1);
+
+                // Guarda los cambios en la base de datos
+                bd.SaveChanges();
+
+                // Si no se producen errores, devuelve true
+                return true;
+            }
+            catch (Exception)
+            {
+                // Si ocurre un error, registra el mensaje de error (si es necesario) y devuelve false
+                return false;
+            }
+        }
+
+        public bool EliminarCliente(int Id)
+        {
+            try
+            {
+                // Ejecuta el procedimiento almacenado generado automáticamente por Entity Framework
+                bd.EliminarContratoConCliente(Id,1);
+
+                // Guarda los cambios en la base de datos
+                bd.SaveChanges();
+
+                // Si no se producen errores, devuelve true
+                return true;
+            }
+            catch (Exception)
+            {
+                // Si ocurre un error, registra el mensaje de error (si es necesario) y devuelve false
+                // Por ejemplo: _logger.LogError("Error al modificar empleado y contrato", ex);
+                return false;
+            }
+        }
+        #endregion
     }
 }

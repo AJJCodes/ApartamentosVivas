@@ -843,6 +843,22 @@
         <Function Name="SpListarUsuariosRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Seguridad">
           <Parameter Name="EstadoUsuario" Type="bit" Mode="In" />
         </Function>
+        <Function Name="EliminarContratoConCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+          <Parameter Name="AnuladoPor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spAgregarClienteYContrato" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="NomCliente" Type="varchar" Mode="In" />
+          <Parameter Name="Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Cedula" Type="varchar" Mode="In" />
+          <Parameter Name="TelCliente" Type="varchar" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="Fechafin" Type="date" Mode="In" />
+          <Parameter Name="Deposito" Type="decimal" Mode="In" />
+          <Parameter Name="IdCuarto" Type="int" Mode="In" />
+          <Parameter Name="CreadoPor" Type="int" Mode="In" />
+        </Function>
         <Function Name="spAgregarCuarto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
           <Parameter Name="CodigoCuarto" Type="varchar" Mode="In" />
           <Parameter Name="DescripcionCuarto" Type="varchar" Mode="In" />
@@ -851,6 +867,7 @@
           <Parameter Name="CostoCuarto" Type="float" Mode="In" />
           <Parameter Name="CreadoPor" Type="int" Mode="In" />
         </Function>
+        <Function Name="spConseguirClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas" />
         <Function Name="spConseguirCuartoporId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
           <Parameter Name="IdCuarto" Type="int" Mode="In" />
         </Function>
@@ -859,12 +876,29 @@
         <Function Name="spEliminarCuarto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
           <Parameter Name="IdCuarto" Type="int" Mode="In" />
         </Function>
+        <Function Name="spModificarClienteYContrato" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+          <Parameter Name="IdContrato" Type="int" Mode="In" />
+          <Parameter Name="NomCliente" Type="varchar" Mode="In" />
+          <Parameter Name="Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Cedula" Type="varchar" Mode="In" />
+          <Parameter Name="TelCliente" Type="varchar" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="Fechafin" Type="date" Mode="In" />
+          <Parameter Name="Deposito" Type="decimal" Mode="In" />
+          <Parameter Name="IdCuarto" Type="int" Mode="In" />
+          <Parameter Name="ModificaPor" Type="int" Mode="In" />
+        </Function>
         <Function Name="spModificarCuarto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
           <Parameter Name="idcuarto" Type="int" Mode="In" />
           <Parameter Name="CodigoCuarto" Type="varchar" Mode="In" />
           <Parameter Name="DescripCuarto" Type="varchar" Mode="In" />
           <Parameter Name="Costo" Type="float" Mode="In" />
           <Parameter Name="ModificaPor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spmostrar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="idcliente" Type="int" Mode="In" />
         </Function>
         <Function Name="spObtenerClientesContratosyCuartos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
           <Parameter Name="EstadoContrato" Type="int" Mode="In" />
@@ -2308,6 +2342,40 @@
           <Parameter Name="IdCliente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConseguirCuartosDisponibles2" ReturnType="Collection(BD.spConseguirCuartosDisponibles2_Result)" />
+          <FunctionImport Name="EliminarContratoConCliente">
+            <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+            <Parameter Name="AnuladoPor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAgregarClienteYContrato">
+            <Parameter Name="NomCliente" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Cedula" Mode="In" Type="String" />
+            <Parameter Name="TelCliente" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="Fechafin" Mode="In" Type="DateTime" />
+            <Parameter Name="Deposito" Mode="In" Type="Decimal" />
+            <Parameter Name="IdCuarto" Mode="In" Type="Int32" />
+            <Parameter Name="CreadoPor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarClienteYContrato">
+            <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+            <Parameter Name="IdContrato" Mode="In" Type="Int32" />
+            <Parameter Name="NomCliente" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Cedula" Mode="In" Type="String" />
+            <Parameter Name="TelCliente" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="Fechafin" Mode="In" Type="DateTime" />
+            <Parameter Name="Deposito" Mode="In" Type="Decimal" />
+            <Parameter Name="IdCuarto" Mode="In" Type="Int32" />
+            <Parameter Name="ModificaPor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spmostrar" ReturnType="Collection(BD.spmostrar_Result)">
+          <Parameter Name="idcliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConseguirClientes" ReturnType="Collection(BD.spConseguirClientes_Result)" />
         </EntityContainer>
         <ComplexType Name="SpListarUsuariosRoles_Result">
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="260" />
@@ -2379,6 +2447,27 @@
           <Property Type="Int32" Name="IdCuarto" Nullable="false" />
           <Property Type="String" Name="CodigoCuarto" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="DescripCuarto" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spmostrar_Result">
+          <Property Type="String" Name="CodigoCuarto" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DescripCuarto" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Costo" Nullable="false" />
+          <Property Type="String" Name="NomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="correo" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="TelCliente" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="260" />
+          <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="260" />
+          <Property Type="String" Name="Nombre1" Nullable="true" MaxLength="260" />
+          <Property Type="String" Name="Apellidos1" Nullable="true" MaxLength="260" />
+          <Property Type="String" Name="Nombre2" Nullable="true" MaxLength="260" />
+          <Property Type="String" Name="Apellidos2" Nullable="true" MaxLength="260" />
+        </ComplexType>
+        <ComplexType Name="spConseguirClientes_Result">
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="String" Name="NomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2709,6 +2798,38 @@
                 <ScalarProperty Name="IdCuarto" ColumnName="IdCuarto" />
                 <ScalarProperty Name="CodigoCuarto" ColumnName="CodigoCuarto" />
                 <ScalarProperty Name="DescripCuarto" ColumnName="DescripCuarto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="EliminarContratoConCliente" FunctionName="BD.Store.EliminarContratoConCliente" />
+          <FunctionImportMapping FunctionImportName="spAgregarClienteYContrato" FunctionName="BD.Store.spAgregarClienteYContrato" />
+          <FunctionImportMapping FunctionImportName="spModificarClienteYContrato" FunctionName="BD.Store.spModificarClienteYContrato" />
+          <FunctionImportMapping FunctionImportName="spmostrar" FunctionName="BD.Store.spmostrar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.spmostrar_Result">
+                <ScalarProperty Name="CodigoCuarto" ColumnName="CodigoCuarto" />
+                <ScalarProperty Name="DescripCuarto" ColumnName="DescripCuarto" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="NomCliente" ColumnName="NomCliente" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="TelCliente" ColumnName="TelCliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombre1" ColumnName="Nombre1" />
+                <ScalarProperty Name="Apellidos1" ColumnName="Apellidos1" />
+                <ScalarProperty Name="Nombre2" ColumnName="Nombre2" />
+                <ScalarProperty Name="Apellidos2" ColumnName="Apellidos2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConseguirClientes" FunctionName="BD.Store.spConseguirClientes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.spConseguirClientes_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NomCliente" ColumnName="NomCliente" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

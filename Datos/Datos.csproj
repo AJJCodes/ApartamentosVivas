@@ -117,6 +117,9 @@
     <Compile Include="Rol_Operacion.cs">
       <DependentUpon>BaseDatos.tt</DependentUpon>
     </Compile>
+    <Compile Include="spConseguirClientes_Result.cs">
+      <DependentUpon>BaseDatos.tt</DependentUpon>
+    </Compile>
     <Compile Include="spConseguirCuartoporId_Result.cs">
       <DependentUpon>BaseDatos.tt</DependentUpon>
     </Compile>
@@ -130,6 +133,9 @@
       <DependentUpon>BaseDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="SpListarUsuariosRoles_Result.cs">
+      <DependentUpon>BaseDatos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spmostrar_Result.cs">
       <DependentUpon>BaseDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="spObtenerClientesContratosyCuartosConID_Result.cs">

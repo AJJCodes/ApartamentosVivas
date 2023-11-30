@@ -9,7 +9,11 @@
             url: Componente.UrlControlador + "ObtenerListaCuartos",
             type: "POST",
             dataType: "json",
-            success: function (data) {
+            success: function (response) {
+                console.log('Datos recibidos:', response);  // Agrega esta línea para depurar
+
+                var data = response.data;  // Accede a la propiedad 'data' en la respuesta
+
                 var $IdCuarto = $('#IdCuarto');
                 $IdCuarto.empty();
 

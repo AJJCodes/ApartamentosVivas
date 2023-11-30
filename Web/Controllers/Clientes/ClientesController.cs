@@ -87,5 +87,86 @@ namespace Web.Controllers.Clientes
             return PartialView("Modificar", ClienteyContrato);
         }
         #endregion
+
+        #region Validaciones
+
+        //Validar Cedula 
+        [HttpPost]
+        public ActionResult ValidarCedula(string Cedula)
+        {
+            bool resultado = ln.VerificarExistenciaCedula(Cedula);
+            return Json(!resultado, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //Validar Cedula 
+        [HttpPost]
+        public ActionResult ValidarCedulaConId(string Cedula, int ID)
+        {
+            bool resultado = ln.ValidarCedulaConID(Cedula, ID);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ValidarCorreo(string Correo)
+        {
+            bool resultado = ln.VerificarExistenciaCorreo(Correo);
+            return Json(!resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ValidarCorreoConId(string Correo, int ID)
+        {
+            bool resultado = ln.VerificarExistenciaCorreoConId(Correo, ID);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region CRUD
+        [HttpPost]
+        public ActionResult AgregarClienteyContrato(ClienteContrato_VM e)
+        {
+            try
+            {
+                bool resultado = ln.AgregarClienteyContrato(e);
+
+                if (resultado)
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false });
+            }
+        }
+
+
+        public ActionResult EliminarCliente(int IdCliente)
+        {
+            try
+            {
+                bool resultado = ln.EliminarCliente(IdCliente);
+
+                if (resultado)
+                {
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false });
+            }
+        }
+        #endregion
+
     }
 }
