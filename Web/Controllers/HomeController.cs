@@ -29,5 +29,11 @@ namespace Web.Controllers
 
             return View();
         }
+
+        public ActionResult CerrarSesion()
+        {
+            return RedirectToAction("Index", "Login");
+        }
+
     }
 }
