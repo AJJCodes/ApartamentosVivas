@@ -117,8 +117,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Clientes\ClientesController.cs" />
     <Compile Include="Controllers\Cuartos\CuartosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Mantenimiento\MantenimientoController.cs" />
     <Compile Include="Controllers\Seguridad\AccesoController.cs" />
     <Compile Include="Controllers\Seguridad\BaseController.cs" />
     <Compile Include="Controllers\Seguridad\RolesController.cs" />
@@ -2554,7 +2556,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JSvistas\Clientes\Index.js" />
     <Content Include="Scripts\JSvistas\Cuartos\Cuarto\Index.js" />
+    <Content Include="Scripts\JSvistas\Cuartos\Cuarto\Modificar.js" />
+    <Content Include="Scripts\JSvistas\Mantenimiento\Index.js" />
     <Content Include="Scripts\JSvistas\Seguridad\Roles\Index.js" />
     <Content Include="Scripts\JSvistas\Seguridad\Usuario\Index.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -2577,6 +2582,10 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Cuartos\Index.cshtml" />
+    <Content Include="Views\Cuartos\Modificar.cshtml" />
+    <Content Include="Views\Mantenimiento\Index.cshtml" />
+    <Content Include="Views\Clientes\Index.cshtml" />
+    <Content Include="Views\Clientes\Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

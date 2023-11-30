@@ -1,0 +1,62 @@
+﻿@model Modelo.Cuartos.CuartoVista_VM
+﻿
+
+
+@* Estilo del error *@
+<style>
+    form .error {
+        color: red;
+    }
+
+    input.error {
+        border-color: red;
+    }
+</style>
+
+<div id="<DivModificarCuarto</Div>" class="container shadow-lg p-4">
+    <form class="row" id="ModificarCuartoForm">
+
+        <div>
+            <input type="hidden" name="IdCuarto" id="IdCuarto" value="@Model.IdCuarto" />
+        </div>
+
+        <p class="text-start my-3 fw-bold fs-4">Datos del Cuarto</p>
+
+        <!-- Lado izquierdo -->
+
+        <div class="col-6">
+            <label for="CodigoCuarto" class="form-label">Codigo Cuarto:</label>
+            <input type="text" class="form-control" id="CodigoCuartoMod" name="CodigoCuartoMod" value="@Model.CodigoCuarto">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col">
+
+            <div class="form-group">
+                <label for="DescripCuarto" class="form-label">Descripcion Cuarto:</label>
+                <input type="text" name="DescripCuartoMod" id="DescripCuartoMod" class="form-control" value="@Model.DescripCuarto">
+                <div class="invalid-feedback"></div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-12" style="margin-bottom: 20px;">
+            <label for="Costo" class="form-label">Costo del Cuarto:</label>
+            <input type="number" class="form-control" id="CostoMod" name="CostoMod" value="@Model.Costo">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div style="text-align: right; background-color: #D3CECE;" class="p-2">
+            <button type="submit" class="btn btn-primary"><i class="las la-save"></i> Modificar</button>
+            <button id="cancelButton" type="button" class="btn btn-danger"><i class="las la-undo"></i> Cancelar</button>
+        </div>
+
+    </form>
+</div>
+
+
+
+<!-- Configuración de la tabla de Cargos -->
+<script src="~/scripts/JSvistas/Cuartos/Cuarto/Modificar.js"></script>
+
+

@@ -51,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clientes\Clientes_LN.cs" />
     <Compile Include="Cuartos\Cuarto_LN.cs" />
+    <Compile Include="Mantenimiento\Mantenimiento_LN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\Acceso_LN.cs" />
     <Compile Include="Seguridad\Roles_LN.cs" />

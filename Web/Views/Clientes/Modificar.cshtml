@@ -1,0 +1,124 @@
+﻿@model Modelo.Clientes.ClienteyContratoConID_VM
+﻿
+@* Estilo del error *@
+<style>
+    form .error {
+        color: red;
+    }
+
+    input.error {
+        border-color: red;
+    }
+</style>
+
+<div id="<DivModificarCliente</Div>" class="container shadow-lg p-4">
+    <form class="row" id="ModificarClienteyContratoForm">
+
+        <div>
+            <input type="hidden" name="IdCliente" id="IdCliente" value="@Model.IdCliente" />
+        </div>
+
+        <div>
+            <input type="hidden" name="IdCliente" id="IdContrato" value="@Model.IdContrato" />
+        </div>
+
+        <p class="text-start my-3 fw-bold fs-4">Datos Cliente</p>
+
+        <!-- Lado izquierdo -->
+
+        <div class="col-6">
+            <label for="NombreCliente" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="NombreClienteMod" name="NombreClienteMod" value="@Model.NomCliente">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col">
+
+            <div class="form-group">
+                <label for="Apellido" class="form-label">Apellido:</label>
+                <input type="text" name="ApellidoMod" id="ApellidoMod" class="form-control" value="@Model.Apellido">
+                <div class="invalid-feedback"></div>
+            </div>
+
+        </div>
+
+
+        <div class="col-6">
+            <label for="Cedula" class="form-label">Cedula:</label>
+            <input type="text" class="form-control" id="CedulaMod" name="CedulaMod" value="@Model.Cedula">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-6">
+            <label for="TelefonoCliente" class="form-label">Celular:</label>
+            <input type="tel" class="form-control" id="TelefonoClienteMod" name="TelefonoClienteMod" value="@Model.TelCliente">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-6">
+            <label for="Correo" class="form-label">Correo:</label>
+            <input type="email" class="form-control" id="CorreoMod" name="CorreoMod" value="@Model.correo">
+            <div class="invalid-feedback"></div>
+        </div>
+
+
+        <div class=" p-4">
+            <hr style="border: 2PX solid BLACK" />
+        </div>
+
+
+        <p class="text-start my-3 fw-bold fs-4">Datos de Contrato</p>
+
+
+        <div class="col-6" style="margin-bottom: 20px;">
+            <label for="Deposito" class="form-label">Deposito Inical:</label>
+            <input type="number" class="form-control" id="DepositoMod" name="DepositoMod" value="@Model.Deposito">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-6">
+            <div class="">
+                <label for="IdCuarto" class="form-label">Cuarto: </label>
+                <div class="dropdown">
+                    <select class="selectpicker form-control" select data-live-search="true" data-live-search-style="startsWith" id="IdCuartoMod" name="IdCuartoMod" aria-label="Seleccionar">
+                        <option value="@Model.IdCuarto" selected>@Model.CodigoCuarto @Model.DescripCuarto</option>
+                    </select>
+                    <div class="invalid-feedback"></div>
+                    <div class="dropdown-menu" aria-labelledby="IdCuarto">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @*value="@Model.IdCuarto"*@
+
+
+        <div class="col-6">
+            <label for="FechaInicio" class="form-label">Fecha de Inicio de Contrato</label>
+            <input type="date" name="FechaInicio" id="FechaInicio" value="@Model.FechaIni.ToString("yyyy-MM-dd")" class="w-100 form-control" />
+        </div>
+
+
+        <div class="col-6 mb-3">
+            <label for="FechaFinMod" class="form-label">Fecha de Fin de Contrato</label>
+            <input type="date" name="FechaFinMod" id="FechaFinMod" class="w-100 form-control" value="@(Model.Fechafin.HasValue ? Model.Fechafin.Value.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture) : string.Empty)" />
+        </div>
+
+
+
+
+        <div style="text-align: right; background-color: #D3CECE;" class="p-2">
+            <button type="submit" class="btn btn-primary"><i class="las la-save"></i> Agregar</button>
+            <button id="cancelButtonMod" type="button" class="btn btn-danger"><i class="las la-undo"></i> Cancelar</button>
+        </div>
+    </form>
+</div>
+
+
+
+<!-- Configuración de la tabla de Cargos -->
+<script src="~/scripts/cliente/ValidacionesMod.js"></script>
+<script src="~/scripts/cliente/Modificar.js"></script>
+
+

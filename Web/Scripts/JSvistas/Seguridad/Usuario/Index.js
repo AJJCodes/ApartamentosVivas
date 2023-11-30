@@ -1,92 +1,88 @@
 ﻿$(document).ready(function () {
 
-    //Validaciones
-    $("#AgregarClienteyContratoForm").validate({
-        rules: {
-            NombrePersona: {
-                required: true,
-                minlength: 3
-            },
-            Apellido: {
-                required: true,
-                minlength: 3
-            },
-            NombreUsuario: {
-                required: true,
-                remote: {
-                    url: Componente.UrlControlador +'ValidarUsuario',
-                    type: 'post',
-                    data: {
-                        Usuario: function () {
-                            return $('#NombreUsuario').val();
-                        }
-                    }
-                }
-            },
-            CampoContraseña: {
-                required: true,
-                minlength: 8
-            },
-            Correo: {
-                required: true,
-                email: true,
-                remote: {
-                    url: Componente.UrlControlador +'ValidarCorreo',
-                    type: 'post',
-                    data: {
-                        Cedula: function () {
-                            return $('#Correo').val();
-                        }
-                    }
-                }
-            },
-            IdCuarto: {
-                required: true
-            }
-        },
-        messages: {
-            NombrePersona: {
-                required: "Por favor ingrese su nombre",
-                minlength: "El nombre debe tener al menos 3 caracteres"
-            },
-            Apellido: {
-                required: "Por favor ingrese su apellido",
-                minlength: "El apellido debe tener al menos 3 caracteres"
-            },
-            NombreUsuario: {
-                required: "Por favor ingrese su cédula",
-                remote: "Esa cedula ya esta registrada en el sistema"
-            },
-            TelefonoCliente: {
-                required: "Por favor ingrese su número de teléfono",
-                minlength: "El número de teléfono debe tener 8 dígitos",
-                maxlength: "El número de teléfono debe tener 8 dígitos",
-                digits: "El número de teléfono debe contener solo números"
-            },
-            Correo: {
-                required: "Por favor ingrese su correo electrónico",
-                email: "Por favor ingrese un correo electrónico válido",
-                remote: "Ese Correo ya esta registrado en el sistema"
-            },
-            IdCuarto: {
-                required: "Porfavor seleccione un cuarto"
-            }
-        },
-        highlight: function (element) {
-            $(element).addClass('is-invalid').removeClass('is-valid');
-        },
-        unhighlight: function (element) {
-            $(element).addClass('is-valid').removeClass('is-invalid');
-        }
-    });
-
-
-
-
     window.Componente = {
         UrlControlador: "/Usuario/"
     };
 
+    //Validaciones
+    //$("#AgregarClienteyContratoForm").validate({
+    //    rules: {
+    //        NombrePersona: {
+    //            required: true,
+    //            minlength: 3
+    //        },
+    //        Apellido: {
+    //            required: true,
+    //            minlength: 3
+    //        },
+    //        NombreUsuario: {
+    //            required: true,
+    //            remote: {
+    //                url: Componente.UrlControlador +'ValidarUsuario',
+    //                type: 'post',
+    //                data: {
+    //                    Usuario: function () {
+    //                        return $('#NombreUsuario').val();
+    //                    }
+    //                }
+    //            }
+    //        },
+    //        CampoContraseña: {
+    //            required: true,
+    //            minlength: 8
+    //        },
+    //        Correo: {
+    //            required: true,
+    //            email: true,
+    //            remote: {
+    //                url: Componente.UrlControlador +'ValidarCorreo',
+    //                type: 'post',
+    //                data: {
+    //                    Cedula: function () {
+    //                        return $('#Correo').val();
+    //                    }
+    //                }
+    //            }
+    //        },
+    //        IdCuarto: {
+    //            required: true
+    //        }
+    //    },
+    //    messages: {
+    //        NombrePersona: {
+    //            required: "Por favor ingrese su nombre",
+    //            minlength: "El nombre debe tener al menos 3 caracteres"
+    //        },
+    //        Apellido: {
+    //            required: "Por favor ingrese su apellido",
+    //            minlength: "El apellido debe tener al menos 3 caracteres"
+    //        },
+    //        NombreUsuario: {
+    //            required: "Por favor ingrese su cédula",
+    //            remote: "Esa cedula ya esta registrada en el sistema"
+    //        },
+    //        TelefonoCliente: {
+    //            required: "Por favor ingrese su número de teléfono",
+    //            minlength: "El número de teléfono debe tener 8 dígitos",
+    //            maxlength: "El número de teléfono debe tener 8 dígitos",
+    //            digits: "El número de teléfono debe contener solo números"
+    //        },
+    //        Correo: {
+    //            required: "Por favor ingrese su correo electrónico",
+    //            email: "Por favor ingrese un correo electrónico válido",
+    //            remote: "Ese Correo ya esta registrado en el sistema"
+    //        },
+    //        IdCuarto: {
+    //            required: "Porfavor seleccione un cuarto"
+    //        }
+    //    },
+    //    highlight: function (element) {
+    //        $(element).addClass('is-invalid').removeClass('is-valid');
+    //    },
+    //    unhighlight: function (element) {
+    //        $(element).addClass('is-valid').removeClass('is-invalid');
+    //    }
+    //});
 
     ObtenerUsuarios();
 

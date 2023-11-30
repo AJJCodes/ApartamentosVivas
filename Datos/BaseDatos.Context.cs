@@ -68,5 +68,109 @@ namespace Datos
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConseguirCuartos_Result>("spConseguirCuartos");
         }
+    
+        public virtual ObjectResult<spConseguirCuartoporId_Result> spConseguirCuartoporId(Nullable<int> idCuarto)
+        {
+            var idCuartoParameter = idCuarto.HasValue ?
+                new ObjectParameter("IdCuarto", idCuarto) :
+                new ObjectParameter("IdCuarto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConseguirCuartoporId_Result>("spConseguirCuartoporId", idCuartoParameter);
+        }
+    
+        public virtual int spEliminarCuarto(Nullable<int> idCuarto)
+        {
+            var idCuartoParameter = idCuarto.HasValue ?
+                new ObjectParameter("IdCuarto", idCuarto) :
+                new ObjectParameter("IdCuarto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEliminarCuarto", idCuartoParameter);
+        }
+    
+        public virtual int spModificarCuarto(Nullable<int> idcuarto, string codigoCuarto, string descripCuarto, Nullable<double> costo, Nullable<int> modificaPor)
+        {
+            var idcuartoParameter = idcuarto.HasValue ?
+                new ObjectParameter("idcuarto", idcuarto) :
+                new ObjectParameter("idcuarto", typeof(int));
+    
+            var codigoCuartoParameter = codigoCuarto != null ?
+                new ObjectParameter("CodigoCuarto", codigoCuarto) :
+                new ObjectParameter("CodigoCuarto", typeof(string));
+    
+            var descripCuartoParameter = descripCuarto != null ?
+                new ObjectParameter("DescripCuarto", descripCuarto) :
+                new ObjectParameter("DescripCuarto", typeof(string));
+    
+            var costoParameter = costo.HasValue ?
+                new ObjectParameter("Costo", costo) :
+                new ObjectParameter("Costo", typeof(double));
+    
+            var modificaPorParameter = modificaPor.HasValue ?
+                new ObjectParameter("ModificaPor", modificaPor) :
+                new ObjectParameter("ModificaPor", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarCuarto", idcuartoParameter, codigoCuartoParameter, descripCuartoParameter, costoParameter, modificaPorParameter);
+        }
+    
+        public virtual int spAgregarCuarto(string codigoCuarto, string descripcionCuarto, Nullable<bool> estadoRenta, Nullable<bool> estadoMante, Nullable<double> costoCuarto, Nullable<int> creadoPor)
+        {
+            var codigoCuartoParameter = codigoCuarto != null ?
+                new ObjectParameter("CodigoCuarto", codigoCuarto) :
+                new ObjectParameter("CodigoCuarto", typeof(string));
+    
+            var descripcionCuartoParameter = descripcionCuarto != null ?
+                new ObjectParameter("DescripcionCuarto", descripcionCuarto) :
+                new ObjectParameter("DescripcionCuarto", typeof(string));
+    
+            var estadoRentaParameter = estadoRenta.HasValue ?
+                new ObjectParameter("EstadoRenta", estadoRenta) :
+                new ObjectParameter("EstadoRenta", typeof(bool));
+    
+            var estadoManteParameter = estadoMante.HasValue ?
+                new ObjectParameter("EstadoMante", estadoMante) :
+                new ObjectParameter("EstadoMante", typeof(bool));
+    
+            var costoCuartoParameter = costoCuarto.HasValue ?
+                new ObjectParameter("CostoCuarto", costoCuarto) :
+                new ObjectParameter("CostoCuarto", typeof(double));
+    
+            var creadoPorParameter = creadoPor.HasValue ?
+                new ObjectParameter("CreadoPor", creadoPor) :
+                new ObjectParameter("CreadoPor", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAgregarCuarto", codigoCuartoParameter, descripcionCuartoParameter, estadoRentaParameter, estadoManteParameter, costoCuartoParameter, creadoPorParameter);
+        }
+    
+        public virtual ObjectResult<spObtenerMantenimiento_Result> spObtenerMantenimiento(Nullable<int> estadoCuarto)
+        {
+            var estadoCuartoParameter = estadoCuarto.HasValue ?
+                new ObjectParameter("EstadoCuarto", estadoCuarto) :
+                new ObjectParameter("EstadoCuarto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObtenerMantenimiento_Result>("spObtenerMantenimiento", estadoCuartoParameter);
+        }
+    
+        public virtual ObjectResult<spObtenerClientesContratosyCuartos_Result> spObtenerClientesContratosyCuartos(Nullable<int> estadoContrato)
+        {
+            var estadoContratoParameter = estadoContrato.HasValue ?
+                new ObjectParameter("EstadoContrato", estadoContrato) :
+                new ObjectParameter("EstadoContrato", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObtenerClientesContratosyCuartos_Result>("spObtenerClientesContratosyCuartos", estadoContratoParameter);
+        }
+    
+        public virtual ObjectResult<spObtenerClientesContratosyCuartosConID_Result> spObtenerClientesContratosyCuartosConID(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("IdCliente", idCliente) :
+                new ObjectParameter("IdCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spObtenerClientesContratosyCuartosConID_Result>("spObtenerClientesContratosyCuartosConID", idClienteParameter);
+        }
+    
+        public virtual ObjectResult<spConseguirCuartosDisponibles2_Result> spConseguirCuartosDisponibles2()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConseguirCuartosDisponibles2_Result>("spConseguirCuartosDisponibles2");
+        }
     }
 }

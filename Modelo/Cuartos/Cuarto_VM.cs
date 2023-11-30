@@ -18,4 +18,21 @@ namespace Modelo.Cuartos
         public Nullable<int> ModificaPor { get; set; }
         public Nullable<int> EliminaPor { get; set; }
     }
+
+    public class CuartoVista_VM
+    {
+        public int IdCuarto { get; set; }
+        public string CodigoCuarto { get; set; }
+        public string DescripCuarto { get; set; }
+        public Nullable<bool> EstadoMante { get; set; }
+        public Nullable<bool> EstadoRenta { get; set; }
+        public double Costo { get; set; }
+    }
+
+    public class CuartoSelectPicker_VM
+    {
+        public int IdCuarto { get; set; }
+        public string CodigoCuarto { get; set; }
+        public string DescripCuarto { get; set; }
+    }
 }

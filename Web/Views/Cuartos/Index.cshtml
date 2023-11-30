@@ -7,20 +7,55 @@
     input.error {
         border-color: red;
     }
+
+    .estadoMante {
+        border-radius: 5px;
+        padding: 5px;
+        display: inline-block;
+        text-align: center; /* Añadido para centrar el texto */
+    }
+
+        .estadoMante.verde {
+            color: white;
+            background-color: green;
+        }
+
+        .estadoMante.rojo {
+            color: white;
+            background-color: red;
+        }
+
+    .estadoRenta {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 10px;
+    }
+
+    .verde {
+        background-color: green;
+        color: white;
+    }
+
+    .rojo {
+        background-color: red;
+        color: white;
+    }
 </style>
 
-
-<div id="DivTablaCuartos" class="p-4 container shadow-lg">
+<div id="DivTablaCuarto" class="p-4 container shadow-lg">
 
     <h2 class="p-4">Tabla de Cuartos</h2>
 
-    <table id="TablaDeCuartos" class="table-responsive table align-middle mb-0 bg-white w-100 table table-striped table-hover table-bordered rounded-2">
+
+    <table id="TablaCuarto" class="table-responsive table align-middle mb-0 bg-white w-100 table table-striped table-hover table-bordered rounded-2">
         <thead class="bg-light">
             <tr>
-                <th>Descripción Cuarto</th>
-                <th>Codigo</th>
-                <th>Disponible</th>
-                <th>En Mantenimiento</th>
+                <th></th> @*este es el espacio del boton*@
+                <th>Codigo Cuarto</th>
+                <th>Descripcion Cuarto</th>
+                <th>Costo</th>
+                <th>Estado Renta</th>
+                <th>Estado Mante</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -29,26 +64,48 @@
     </table>
 </div>
 
-
-
-
-<div id="DivAgregarCuarto" style="display:none" class="container shadow-lg p-4">
-    <form class="row" id="AgregarCuarto">
-
-        <p class="text-start my-3 fw-bold fs-4">Datos Cuarto</p>
-
-        <div class="col-lg-12">
-            <label for="NombreRol" class="form-label">Usuario:</label>
-            <input type="text" class="form-control" id="NombreRol" name="NombreRol" remote="@Url.Action("ValidarCedula", "Roles")">
-            <div class="invalid-feedback"></div>
-        </div>
-    </form>
-</div>
-
-<div id="DivModificarClienteContrato" style="display:none" class="container shadow-lg p-4">
+<div id="DivModificarCuartoCopia" style="display:none" class="container shadow-lg p-4">
     @*Aqui se muestra el html de la de copia*@
 </div>
 
+<div id="DivAgregarCuarto" style="display:none" class="container shadow-lg p-4">
+    <form class="row" id="AgregarCuartoForm">
+
+        <p class="text-start my-3 fw-bold fs-4">Datos del Cuarto</p>
+
+        <!-- Lado izquierdo -->
+
+        <div class="col-6">
+            <label for="CodigoCuarto" class="form-label">Codigo Cuarto:</label>
+            <input type="text" class="form-control" id="CodigoCuarto" name="CodigoCuarto">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col">
+
+            <div class="form-group">
+                <label for="DescripCuarto" class="form-label">Descripcion Cuarto:</label>
+                <input type="text" name="DescripCuarto" id="DescripCuarto" class="form-control">
+                <div class="invalid-feedback"></div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-12" style="margin-bottom: 20px;">
+            <label for="Costo" class="form-label">Costo del Cuarto:</label>
+            <input type="number" class="form-control" id="Costo" name="Costo">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div style="text-align: right; background-color: #D3CECE;" class="p-2">
+            <button type="submit" class="btn btn-primary"><i class="las la-save"></i> Agregar</button>
+            <button id="cancelButton" type="button" class="btn btn-danger"><i class="las la-undo"></i> Cancelar</button>
+        </div>
+
+
+    </form>
+</div>
+
 @section scripts{
-    <script src="~/Scripts/JSvistas/Cuartos/Cuarto/Index.js"></script>
+    <script type="text/javascript" src="~/Scripts/JSvistas/Cuartos/Cuarto/Index.js"></script>
 }

@@ -843,7 +843,38 @@
         <Function Name="SpListarUsuariosRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Seguridad">
           <Parameter Name="EstadoUsuario" Type="bit" Mode="In" />
         </Function>
+        <Function Name="spAgregarCuarto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="CodigoCuarto" Type="varchar" Mode="In" />
+          <Parameter Name="DescripcionCuarto" Type="varchar" Mode="In" />
+          <Parameter Name="EstadoRenta" Type="bit" Mode="In" />
+          <Parameter Name="EstadoMante" Type="bit" Mode="In" />
+          <Parameter Name="CostoCuarto" Type="float" Mode="In" />
+          <Parameter Name="CreadoPor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConseguirCuartoporId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="IdCuarto" Type="int" Mode="In" />
+        </Function>
         <Function Name="spConseguirCuartos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas" />
+        <Function Name="spConseguirCuartosDisponibles2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas" />
+        <Function Name="spEliminarCuarto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="IdCuarto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spModificarCuarto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="idcuarto" Type="int" Mode="In" />
+          <Parameter Name="CodigoCuarto" Type="varchar" Mode="In" />
+          <Parameter Name="DescripCuarto" Type="varchar" Mode="In" />
+          <Parameter Name="Costo" Type="float" Mode="In" />
+          <Parameter Name="ModificaPor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spObtenerClientesContratosyCuartos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="EstadoContrato" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spObtenerClientesContratosyCuartosConID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spObtenerMantenimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="vivas">
+          <Parameter Name="EstadoCuarto" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="BDStoreContainer">
           <EntitySet Name="Controlador" EntityType="Self.Controlador" Schema="Seguridad" store:Type="Tables" />
           <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="Seguridad" store:Type="Tables" />
@@ -2246,6 +2277,37 @@
           <Parameter Name="EstadoRol" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spConseguirCuartos" ReturnType="Collection(BD.spConseguirCuartos_Result)" />
+          <FunctionImport Name="spConseguirCuartoporId" ReturnType="Collection(BD.spConseguirCuartoporId_Result)">
+          <Parameter Name="IdCuarto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarCuarto">
+          <Parameter Name="IdCuarto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarCuarto">
+            <Parameter Name="idcuarto" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoCuarto" Mode="In" Type="String" />
+            <Parameter Name="DescripCuarto" Mode="In" Type="String" />
+            <Parameter Name="Costo" Mode="In" Type="Double" />
+            <Parameter Name="ModificaPor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAgregarCuarto">
+            <Parameter Name="CodigoCuarto" Mode="In" Type="String" />
+            <Parameter Name="DescripcionCuarto" Mode="In" Type="String" />
+            <Parameter Name="EstadoRenta" Mode="In" Type="Boolean" />
+            <Parameter Name="EstadoMante" Mode="In" Type="Boolean" />
+            <Parameter Name="CostoCuarto" Mode="In" Type="Double" />
+            <Parameter Name="CreadoPor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerMantenimiento" ReturnType="Collection(BD.spObtenerMantenimiento_Result)">
+          <Parameter Name="EstadoCuarto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerClientesContratosyCuartos" ReturnType="Collection(BD.spObtenerClientesContratosyCuartos_Result)">
+          <Parameter Name="EstadoContrato" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerClientesContratosyCuartosConID" ReturnType="Collection(BD.spObtenerClientesContratosyCuartosConID_Result)">
+          <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConseguirCuartosDisponibles2" ReturnType="Collection(BD.spConseguirCuartosDisponibles2_Result)" />
         </EntityContainer>
         <ComplexType Name="SpListarUsuariosRoles_Result">
           <Property Type="String" Name="Nombre" Nullable="true" MaxLength="260" />
@@ -2270,6 +2332,53 @@
           <Property Type="Int32" Name="CreadoPor" Nullable="true" />
           <Property Type="Int32" Name="ModificaPor" Nullable="true" />
           <Property Type="Int32" Name="EliminaPor" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConseguirCuartoporId_Result">
+          <Property Type="Int32" Name="IdCuarto" Nullable="false" />
+          <Property Type="String" Name="CodigoCuarto" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DescripCuarto" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoMante" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoRenta" Nullable="true" />
+          <Property Type="Double" Name="Costo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spObtenerMantenimiento_Result">
+          <Property Type="String" Name="CodigoCuarto" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DescripCuarto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DescripDetalle" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Costo" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="spObtenerClientesContratosyCuartos_Result">
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="String" Name="Nombre_Completo" Nullable="false" MaxLength="102" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="correo" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="TelCliente" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="IdContrato" Nullable="false" />
+          <Property Type="Double" Name="Deposito" Nullable="false" />
+          <Property Type="String" Name="CodigoCuarto" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DescripCuarto" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spObtenerClientesContratosyCuartosConID_Result">
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="String" Name="NomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="correo" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="TelCliente" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="IdContrato" Nullable="false" />
+          <Property Type="Int32" Name="IdCuarto" Nullable="true" />
+          <Property Type="DateTime" Name="FechaIni" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Fechafin" Nullable="true" />
+          <Property Type="Double" Name="Deposito" Nullable="false" />
+          <Property Type="String" Name="CodigoCuarto" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DescripCuarto" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spConseguirCuartosDisponibles2_Result">
+          <Property Type="Int32" Name="IdCuarto" Nullable="false" />
+          <Property Type="String" Name="CodigoCuarto" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DescripCuarto" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2530,6 +2639,76 @@
                 <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
                 <ScalarProperty Name="ModificaPor" ColumnName="ModificaPor" />
                 <ScalarProperty Name="EliminaPor" ColumnName="EliminaPor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConseguirCuartoporId" FunctionName="BD.Store.spConseguirCuartoporId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.spConseguirCuartoporId_Result">
+                <ScalarProperty Name="IdCuarto" ColumnName="IdCuarto" />
+                <ScalarProperty Name="CodigoCuarto" ColumnName="CodigoCuarto" />
+                <ScalarProperty Name="DescripCuarto" ColumnName="DescripCuarto" />
+                <ScalarProperty Name="EstadoMante" ColumnName="EstadoMante" />
+                <ScalarProperty Name="EstadoRenta" ColumnName="EstadoRenta" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spEliminarCuarto" FunctionName="BD.Store.spEliminarCuarto" />
+          <FunctionImportMapping FunctionImportName="spModificarCuarto" FunctionName="BD.Store.spModificarCuarto" />
+          <FunctionImportMapping FunctionImportName="spAgregarCuarto" FunctionName="BD.Store.spAgregarCuarto" />
+          <FunctionImportMapping FunctionImportName="spObtenerMantenimiento" FunctionName="BD.Store.spObtenerMantenimiento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.spObtenerMantenimiento_Result">
+                <ScalarProperty Name="CodigoCuarto" ColumnName="CodigoCuarto" />
+                <ScalarProperty Name="DescripCuarto" ColumnName="DescripCuarto" />
+                <ScalarProperty Name="DescripDetalle" ColumnName="DescripDetalle" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerClientesContratosyCuartos" FunctionName="BD.Store.spObtenerClientesContratosyCuartos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.spObtenerClientesContratosyCuartos_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="TelCliente" ColumnName="TelCliente" />
+                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+                <ScalarProperty Name="Deposito" ColumnName="Deposito" />
+                <ScalarProperty Name="CodigoCuarto" ColumnName="CodigoCuarto" />
+                <ScalarProperty Name="DescripCuarto" ColumnName="DescripCuarto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerClientesContratosyCuartosConID" FunctionName="BD.Store.spObtenerClientesContratosyCuartosConID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.spObtenerClientesContratosyCuartosConID_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NomCliente" ColumnName="NomCliente" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="TelCliente" ColumnName="TelCliente" />
+                <ScalarProperty Name="IdContrato" ColumnName="IdContrato" />
+                <ScalarProperty Name="IdCuarto" ColumnName="IdCuarto" />
+                <ScalarProperty Name="FechaIni" ColumnName="FechaIni" />
+                <ScalarProperty Name="Fechafin" ColumnName="Fechafin" />
+                <ScalarProperty Name="Deposito" ColumnName="Deposito" />
+                <ScalarProperty Name="CodigoCuarto" ColumnName="CodigoCuarto" />
+                <ScalarProperty Name="DescripCuarto" ColumnName="DescripCuarto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConseguirCuartosDisponibles2" FunctionName="BD.Store.spConseguirCuartosDisponibles2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD.spConseguirCuartosDisponibles2_Result">
+                <ScalarProperty Name="IdCuarto" ColumnName="IdCuarto" />
+                <ScalarProperty Name="CodigoCuarto" ColumnName="CodigoCuarto" />
+                <ScalarProperty Name="DescripCuarto" ColumnName="DescripCuarto" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

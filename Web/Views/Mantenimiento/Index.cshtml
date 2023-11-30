@@ -1,0 +1,87 @@
+﻿﻿
+@{ ViewBag.Title = "Tabla Mantenimientos"; }
+
+
+@* Estilo del error *@
+<style>
+    form .error {
+        color: red;
+    }
+
+    input.error {
+        border-color: red;
+    }
+</style>
+
+
+<div id="DivTablaMantenimientos" class="p-4 container shadow-lg">
+
+    <h2 class="p-4">Tabla de Mantenimientos</h2>
+
+    <table id="TablaMantenimientos" class="table-responsive table align-middle mb-0 bg-white w-100 table table-striped table-hover table-bordered rounded-2">
+        <thead class="bg-light">
+            <tr>
+                <th></th> @*este es el espacio del boton*@
+                <th>Codigo Cuarto</th>
+                <th>Descripcion Cuarto</th>
+                <th>Detalle de Mantenimiento</th>
+                <th>Costo</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<div id="DivAgregarMantenimiento" style="display:none" class="container shadow-lg p-4">
+    <form class="row" id="AgregarMantenimientoForm">
+
+        <p class="text-start my-3 fw-bold fs-4">Datos Mantenimiento</p>
+
+        <!-- Lado izquierdo -->
+
+        <div class="col-6">
+            <label for="CodigoCuarto" class="form-label">Codigo cuarto:</label>
+            <input type="text" class="form-control" id="CodigoCuarto" name="CodigoCuarto">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-6">
+            <label for="DescripcionCuarto" class="form-label">Descripcion Cuarto:</label>
+            <input type="text" class="form-control" id="Cedula" name="Cedula">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-6">
+            <label for="DetalleMantenimiento" class="form-label">Detalle de Mantenimiento:</label>
+            <input type="tel" class="form-control" id="DetalleMantenimiento" name="DetalleMantenimiento">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-6">
+            <label for="Costo" class="form-label">Costo:</label>
+            <input type="email" class="form-control" id="Costo" name="Costo">
+            <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="col-6">
+            <label for="Fecha" class="form-label">Fecha:</label>
+            <input type="email" class="form-control" id="Fecha" name="Fecha">
+            <div class="invalid-feedback"></div>
+        </div>
+    </form>
+</div>
+
+<div id="DivModificarClienteContrato" style="display:none" class="container shadow-lg p-4">
+    @*Aqui se muestra el html de la de copia*@
+</div>
+
+@section scripts{
+    <!-- Configuración de la tabla de Cargos -->
+    <script type="text/javascript" src="~/Scripts/JSvistas/Mantenimiento/Index.js"></script>
+}
